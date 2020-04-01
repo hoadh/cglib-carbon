@@ -1,2 +1,7 @@
 $font-path: '~carbon-components/src/globals/fonts';
 @import "~carbon-components/scss/globals/scss/styles.scss";
+@import './assets/carbon-overrides.scss';
+
+$feature-flags: (
+  grid-columns-16: true
+);
