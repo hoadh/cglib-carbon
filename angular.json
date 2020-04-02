@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "carbon-project": {
+    "cglib-carbon": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/carbon-project",
+            "outputPath": "dist/cglib-carbon",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "carbon-project:build"
+            "browserTarget": "cglib-carbon:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "carbon-project:build:production"
+              "browserTarget": "cglib-carbon:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "carbon-project:build"
+            "browserTarget": "cglib-carbon:build"
           }
         },
         "test": {
@@ -117,15 +117,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "carbon-project:serve"
+            "devServerTarget": "cglib-carbon:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "carbon-project:serve:production"
+              "devServerTarget": "cglib-carbon:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "carbon-project"
+  "defaultProject": "cglib-carbon"
 }
