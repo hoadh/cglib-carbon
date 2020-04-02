@@ -13,11 +13,15 @@ import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppLayoutComponent } from './_layouts/app-layout/app-layout.component';
+import { SiteLayoutComponent } from './_layouts/site-layout/site-layout.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		HeaderComponent
+		HeaderComponent,
+		AppLayoutComponent,
+		SiteLayoutComponent
 	],
 	imports: [
 		BrowserModule,
