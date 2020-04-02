@@ -7,11 +7,15 @@ import {
 	ButtonModule,
 	GridModule,
 	TabsModule,
+	ModalModule,
+	PlaceholderModule,
 } from 'carbon-components-angular';
+import { AddModule } from '@carbon/icons-angular';
 import { InfoModule } from '../info/info.module';
+import { MyModal } from './my-modal/my-modal.component';
 
 @NgModule({
-	declarations: [LandingPageComponent],
+	declarations: [LandingPageComponent, MyModal],
 	imports: [
 		CommonModule,
 		HomeRoutingModule,
@@ -19,7 +23,12 @@ import { InfoModule } from '../info/info.module';
 		GridModule,
 		BreadcrumbModule,
 		TabsModule,
-		InfoModule
-	]
+		InfoModule,
+		ModalModule,
+		PlaceholderModule,
+		AddModule,
+	],
+	exports: [MyModal],
+	entryComponents: [MyModal]
 })
 export class HomeModule { }

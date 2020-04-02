@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,10 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		ButtonModule,
 		UIShellModule,
-		Notification20Module, UserAvatar20Module, AppSwitcher20Module, GraphQLModule, HttpClientModule
+		Notification20Module,
+		UserAvatar20Module,
+		AppSwitcher20Module,
+		GraphQLModule,
+		HttpClientModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

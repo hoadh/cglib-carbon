@@ -1,4 +1,3 @@
-<!-- <button ibmButton>Test</button> -->
 <div ibmGrid class="bx--grid--full-width landing-page">
 	<div ibmRow class="landing-page__banner">
 		<div ibmCol [columnNumbers]="{ lg: 16 }">
@@ -34,7 +33,7 @@
 									guidelines, and a vibrant community of
 									contributors.
 								</p>
-								<button ibmButton>Learn more</button>
+								<button ibmButton (click)="openModal()">Learn more</button>
 							</div>
 							<div
 								ibmCol
@@ -83,3 +82,5 @@
 	</div>
 	<app-info-section></app-info-section>
 </div>
+<ibm-placeholder></ibm-placeholder>
+<!-- <ibm-modal-placeholder></ibm-modal-placeholder> -->
