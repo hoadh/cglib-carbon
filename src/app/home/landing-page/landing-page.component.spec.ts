@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingPageComponent } from './landing-page.component';
+import { InfoSectionComponent } from '../../info/info-section/info-section.component';
 import {
 	BreadcrumbModule,
 	ButtonModule,
 	GridModule,
 	TabsModule,
+	ModalModule,
+	PlaceholderModule,
 } from 'carbon-components-angular';
 
 describe('LandingPageComponent', () => {
@@ -14,11 +17,13 @@ describe('LandingPageComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ LandingPageComponent ],
+			declarations: [ LandingPageComponent, InfoSectionComponent ],
 			imports: [BreadcrumbModule,
 				ButtonModule,
 				GridModule,
 				TabsModule,
+				ModalModule,
+				PlaceholderModule,
 			],
 		})
 		.compileComponents();

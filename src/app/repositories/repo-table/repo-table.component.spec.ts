@@ -4,6 +4,8 @@ import { RepoTableComponent } from './repo-table.component';
 import { GridModule, TableModule } from 'carbon-components-angular';
 import { LinkModule, PaginationModule } from 'carbon-components-angular';
 import { Apollo } from 'apollo-angular';
+import { GraphQLModule } from 'src/app/graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RepoTableComponent', () => {
 	let component: RepoTableComponent;
@@ -12,7 +14,9 @@ describe('RepoTableComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [ RepoTableComponent ],
-			imports: [GridModule, TableModule, LinkModule, PaginationModule],
+			imports: [GridModule, TableModule, LinkModule, PaginationModule,
+				GraphQLModule, HttpClientModule,
+			],
 			providers: [Apollo]
 		})
 		.compileComponents();

@@ -1,12 +1,23 @@
 <ibm-modal size="xl" (overlaySelected)="closeModal()">
-	<ibm-modal-header (closeSelect)="closeModal()">{{modalTitle}}</ibm-modal-header>
-		<section class="modal-body">
-			<h1>{{modalHeading}}</h1>
-			<button class="btn--icon-link" nPopover="Hello there" title="Popover title" placement="right" appendInline="true">
-				<!-- <ibm-icon icon="info" size="sm"></ibm-icon> -->
-				<svg icon ibmIconAdd size="20"></svg>
-			</button>
-			{{modalText}}
-		</section>
-	<ibm-modal-footer><button ibmButton="primary" (click)="closeModal()">Close</button></ibm-modal-footer>
+	<ibm-modal-header (closeSelect)="closeModal()">{{
+		modalTitle
+	}}</ibm-modal-header>
+	<section class="modal-body">
+		<h1>{{ modalHeading }}</h1>
+		<!-- <button
+			class="btn--icon-link"
+			nPopover="Hello there"
+			title="Popover title"
+			placement="right"
+			appendInline="true"
+		>
+		<ibm-icon-add size="16"></ibm-icon-add>
+		</button> -->
+		{{ modalText }}
+	</section>
+	<ibm-modal-footer
+		><button ibmButton="primary" (click)="closeModal()">
+			Close
+		</button></ibm-modal-footer
+	>
 </ibm-modal>
