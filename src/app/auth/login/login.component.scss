@@ -1,0 +1,64 @@
+@import "~carbon-components/scss/globals/scss/vendor/@carbon/type/scss/font-family";
+@import "~carbon-components/scss/globals/scss/typography";
+
+@mixin page-background() {
+	background-color: $ui-01;
+}
+
+.login-page {
+	@include page-background;
+	height: 100%;
+}
+
+.login-page .login-page__input * {
+	width: 100%;
+	max-width: 320px;
+}
+
+.login-page .login-page__bg {
+	@include page-background;
+}
+.landing-page__illo {
+	max-width: 100%;
+}
+
+hr {
+	margin-top: 40px;
+	margin-bottom: 16px;
+	border: 0px;
+}
+
+.login-wrap {
+	margin: auto;
+	// -o-object-fit: contain;
+	object-fit: contain;
+	max-width: 568px;
+}
+
+.modal-wrap {
+	object-fit: contain;
+	padding-top: 40px;
+	width: 100%;
+}
+
+.modal-wrap button {
+	width: 100%;
+}
+
+.modal-form {
+	background-color: #fff;
+	padding-top: 16px;
+	padding-bottom: 40px;
+}
+
+.login-button {
+	max-width: 100%;
+}
+
+.button-group {
+	padding-bottom: 16px;
+}
+
+button svg {
+	fill: white;
+}

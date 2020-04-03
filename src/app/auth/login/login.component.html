@@ -1,1 +1,56 @@
-<p>login works!</p>
+<div class="login-page">
+	<div ibmGrid class="login-wrap">
+		<div ibmRow>
+			<div class="modal-wrap">
+				<div class="modal-form">
+					<div ibmGrid>
+						<div ibmRow><h3>Đăng nhập</h3></div>
+						<div style="height: 40px;"></div>
+						<div ibmRow>
+							<ibm-label
+								[helperText]="'Tên người dùng'"
+								[invalid]="false"
+							>
+								<input
+									ibmText
+									[invalid]="false"
+									[disabled]="false"
+									[theme]="'light'"
+									[placeholder]="'Ví dụ: thu.thu'"
+									[autocomplete]="'on'"
+								/>
+							</ibm-label>
+						</div>
+						<div style="height: 40px;"></div>
+						<div ibmRow>
+							<ibm-label
+								[helperText]="'Mật khẩu'"
+								[invalid]="false"
+							>
+								<input
+									ibmText
+									[invalid]="false"
+									[disabled]="false"
+									[theme]="'light'"
+									[type]="'password'"
+									[autocomplete]="'on'"
+								/>
+							</ibm-label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ibmRow class="button-group">
+			<div ibmCol [columnNumbers]="{ lg: 8 }" style="padding: 0;">
+				<button [ibmButton]="'tertiary'" [disabled]="true" style="width: 100%;">
+					Đăng nhập với CodeGymID
+				</button>
+			</div>
+			<div ibmCol [columnNumbers]="{ lg: 8 }" style="padding: 0;">
+				<button ibmButton style="width: 100%;">Tiếp tục <svg ibmIconChevronRightGlyph size="16"></svg></button>
+			</div>
+		</div>
+	</div>
+</div>

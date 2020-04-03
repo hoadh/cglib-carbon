@@ -6,12 +6,12 @@ import { SiteLayoutComponent } from './_layouts/site-layout/site-layout.componen
 const routes: Routes = [
 	{
 		path: '',
-		component: AppLayoutComponent,
+		// component: AppLayoutComponent,
 		loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
 	},
 	{
 		path: 'repos',
-		component: AppLayoutComponent,
+		// component: AppLayoutComponent,
 		loadChildren: () =>
 			import('./repositories/repositories.module').then(
 				(m) => m.RepositoriesModule
@@ -19,7 +19,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'auth',
-		component: SiteLayoutComponent,
+		// component: SiteLayoutComponent,
 		loadChildren: () =>
 			import('./auth/auth.module').then(m => m.AuthModule),
 	}
