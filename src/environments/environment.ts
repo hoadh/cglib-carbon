@@ -4,7 +4,10 @@
 
 export const environment = {
 	production: false,
-	githubPersonalAccessToken: ''
+	githubPersonalAccessToken: '',
+	apiUrl: 'http://0.0.0.0:8080/api/',
+	uploadUrl: 'http://0.0.0.0:8080/fileupload',
+	baseUrl: 'http://0.0.0.0:8080/',
 };
 
 /*
