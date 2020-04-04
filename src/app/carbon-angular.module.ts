@@ -12,7 +12,9 @@ import {
 	PlaceholderModule,
 	TableModule,
 	LinkModule,
-	PaginationModule
+	PaginationModule,
+	LoadingModule,
+	InlineLoadingModule
 } from 'carbon-components-angular';
 
 const modules: any[] = [
@@ -28,7 +30,9 @@ const modules: any[] = [
 	PlaceholderModule,
 	TableModule,
 	LinkModule,
-	PaginationModule
+	PaginationModule,
+	LoadingModule,
+	InlineLoadingModule
 ];
 
 @NgModule({

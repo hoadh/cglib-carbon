@@ -3,12 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import {
-	InputModule, DocumentationModule,
-	ButtonModule,
-	GridModule,
-} from 'carbon-components-angular';
-
+import { CoreModule } from '../core/core.module';
 import { ChevronRightGlyphModule, ArrowRightModule } from '@carbon/icons-angular';
 
 
@@ -17,9 +12,7 @@ import { ChevronRightGlyphModule, ArrowRightModule } from '@carbon/icons-angular
 	imports: [
 		CommonModule,
 		AuthRoutingModule,
-		ButtonModule,
-		GridModule,
-		InputModule, DocumentationModule,
+		CoreModule,
 		ChevronRightGlyphModule, ArrowRightModule
 	]
 })

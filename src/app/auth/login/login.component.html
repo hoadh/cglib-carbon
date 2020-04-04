@@ -14,7 +14,7 @@
 								<input
 									ibmText
 									[invalid]="false"
-									[disabled]="false"
+									[disabled]="currentState === 1"
 									[theme]="'light'"
 									[placeholder]="'Ví dụ: thu.thu'"
 									[autocomplete]="'on'"
@@ -30,12 +30,19 @@
 								<input
 									ibmText
 									[invalid]="false"
-									[disabled]="false"
+									[disabled]="currentState === 1"
 									[theme]="'light'"
 									[type]="'password'"
 									[autocomplete]="'on'"
 								/>
 							</ibm-label>
+						</div>
+						<div ibmRow>
+							<ibm-inline-loading
+								style="margin: auto 0;"
+								*ngIf="currentState == 1"
+								[loadingText]="'Đang xử lý'">
+							</ibm-inline-loading>
 						</div>
 					</div>
 				</div>
@@ -49,7 +56,10 @@
 				</button>
 			</div>
 			<div ibmCol [columnNumbers]="{ lg: 8 }" style="padding: 0;">
-				<button ibmButton style="width: 100%;">Tiếp tục <svg ibmIconChevronRightGlyph size="16"></svg></button>
+				<button ibmButton style="width: 100%;" (click)="doSignin()" [disabled]="currentState === 1">
+					Đăng nhập
+					<svg *ngIf="currentState === 0" ibmIconChevronRightGlyph size="16"></svg>
+				</button>
 			</div>
 		</div>
 	</div>
