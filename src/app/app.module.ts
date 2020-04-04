@@ -6,14 +6,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
-import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
-import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppLayoutComponent } from './_layouts/app-layout/app-layout.component';
 import { SiteLayoutComponent } from './_layouts/site-layout/site-layout.component';
 import { CoreModule } from './core/core.module';
+
+import {
+	NotificationModule,
+	UserAvatarModule,
+	AppSwitcherModule
+} from '@carbon/icons-angular';
 
 @NgModule({
 	declarations: [
@@ -27,13 +30,14 @@ import { CoreModule } from './core/core.module';
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		CoreModule,
-		Notification20Module,
-		UserAvatar20Module,
-		AppSwitcher20Module,
+		NotificationModule,
+		UserAvatarModule,
+		AppSwitcherModule,
 		GraphQLModule,
 		HttpClientModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
