@@ -1,1 +1,54 @@
-<p>book-table works!</p>
+<ibm-table-container>
+	<ibm-table-header>
+		<h4 ibmTableHeaderTitle>Quản lý sách</h4>
+<!--		<p ibmTableHeaderDescription>..</p>-->
+	</ibm-table-header>
+	<ibm-table-toolbar [model]="model">
+		<ibm-table-toolbar-actions>
+<!--			<button ibmButton="primary">-->
+<!--				Delete-->
+<!--				<ibm-icon-delete16 class="bx&#45;&#45;btn__icon"></ibm-icon-delete16>-->
+<!--			</button>-->
+<!--			<button ibmButton="primary">-->
+<!--				Save-->
+<!--				<ibm-icon-save16 class="bx&#45;&#45;btn__icon"></ibm-icon-save16>-->
+<!--			</button>-->
+<!--			<button ibmButton="primary">-->
+<!--				Download-->
+<!--				<ibm-icon-download16 class="bx&#45;&#45;btn__icon"></ibm-icon-download16>-->
+<!--			</button>-->
+		</ibm-table-toolbar-actions>
+		<ibm-table-toolbar-content>
+			<ibm-table-toolbar-search [expandable]="true"></ibm-table-toolbar-search>
+<!--			<button ibmButton="ghost" class="toolbar-action">-->
+<!--				<ibm-icon-settings16 class="bx&#45;&#45;toolbar-action__icon"></ibm-icon-settings16>-->
+<!--			</button>-->
+			<button ibmButton="primary" size="sm">
+				Thêm Sách
+				<svg ibmIconAdd size="20" class="bx--btn__icon"></svg>
+			</button>
+		</ibm-table-toolbar-content>
+	</ibm-table-toolbar>
+
+	<ibm-table
+		[skeleton]="skeleton"
+		[model]="skeleton ? skeletonModel : model"
+		[showSelectionColumn]="false"
+		[striped]="false">
+	</ibm-table>
+	<ibm-pagination
+		[model]="model"
+		(selectPage)="selectPage($event)">
+	</ibm-pagination>
+</ibm-table-container>
+
+<ng-template #linkTemplate let-data="data">
+	<ul style="display: flex;" *ngIf="data.id">
+		<li style="margin-right: 10px;">
+			<a ibmLink><svg ibmIconEdit size="20" class="bx--btn__icon"></svg></a>
+		</li>
+		<li>
+			<a ibmLink><svg ibmIconTrashCan size="20" class="bx--btn__icon"></svg></a>
+		</li>
+	</ul>
+</ng-template>

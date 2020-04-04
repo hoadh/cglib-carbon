@@ -14,7 +14,8 @@ import {
 	LinkModule,
 	PaginationModule,
 	LoadingModule,
-	InlineLoadingModule
+	InlineLoadingModule,
+	SearchModule
 } from 'carbon-components-angular';
 
 const modules: any[] = [
@@ -29,6 +30,7 @@ const modules: any[] = [
 	ModalModule,
 	PlaceholderModule,
 	TableModule,
+	SearchModule,
 	LinkModule,
 	PaginationModule,
 	LoadingModule,
