@@ -22,6 +22,11 @@ const routes: Routes = [
 		// component: SiteLayoutComponent,
 		loadChildren: () =>
 			import('./auth/auth.module').then(m => m.AuthModule),
+	},
+	{
+		path: 'books',
+		loadChildren: () =>
+			import('./books/books.module').then(m => m.BooksModule),
 	}
 ];
 
