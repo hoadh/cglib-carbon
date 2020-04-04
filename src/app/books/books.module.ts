@@ -5,7 +5,7 @@ import { BooksRoutingModule } from './books-routing.module';
 import { BookListComponent } from './book-list/book-list.component';
 import { CoreModule } from '../core/core.module';
 import { BookTableComponent } from './book-table/book-table.component';
-import { AddModule, EditModule, TrashCanModule } from '@carbon/icons-angular';
+import { AddModule, EditModule, TrashCanModule, DotMarkModule } from '@carbon/icons-angular';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { AddModule, EditModule, TrashCanModule } from '@carbon/icons-angular';
 		CoreModule,
 		AddModule,
 		EditModule,
-		TrashCanModule
+		TrashCanModule,
+		DotMarkModule
 	]
 })
 export class BooksModule {

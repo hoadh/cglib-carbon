@@ -17,8 +17,11 @@ export class BookTableComponent implements OnInit {
 	skeleton = false;
 	data = [];
 
-	@ViewChild('linkTemplate', null)
-	protected linkTemplate: TemplateRef<any>;
+	@ViewChild('actionTemplate', null)
+	protected actionTemplate: TemplateRef<any>;
+
+	@ViewChild('statusTemplate', null)
+	protected statusTemplate: TemplateRef<any>;
 
 	constructor() {
 	}
@@ -29,29 +32,36 @@ export class BookTableComponent implements OnInit {
 				new TableItem({ data: 'Đổi mới sáng tạo', expandedData: 'Row description' }),
 				new TableItem({ data: 'Harvard Business Review' }),
 				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: 'Trên kệ' }),
-				new TableItem({ data: {id: 1}, template: this.linkTemplate }),
+				new TableItem({ data: { status: 1 }, template: this.statusTemplate }),
+				new TableItem({ data: {id: 1}, template: this.actionTemplate }),
 			],
 			[
 				new TableItem({ data: 'Lãnh đạo', expandedData: 'Row description' }),
 				new TableItem({ data: 'Harvard Business Review' }),
 				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: 'Trên kệ' }),
-				new TableItem({ data: {id: 2}, template: this.linkTemplate }),
+				new TableItem({ data: { status: 1 }, template: this.statusTemplate }),
+				new TableItem({ data: {id: 2}, template: this.actionTemplate }),
 			],
 			[
 				new TableItem({ data: 'Marketing chiến lược', expandedData: 'Row description' }),
 				new TableItem({ data: 'Harvard Business Review' }),
 				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: 'Trên kệ' }),
-				new TableItem({ data: {id: 3}, template: this.linkTemplate }),
+				new TableItem({ data: { status: 3 }, template: this.statusTemplate }),
+				new TableItem({ data: {id: 3}, template: this.actionTemplate }),
 			],
 			[
 				new TableItem({ data: 'Mở rộng doanh nghiệp', expandedData: 'Row description' }),
 				new TableItem({ data: 'Verne Harnish' }),
+				new TableItem({ data: 'Marketing' }),
+				new TableItem({ data: { status: 2 }, template: this.statusTemplate }),
+				new TableItem({ data: {id: 4}, template: this.actionTemplate }),
+			],
+			[
+				new TableItem({ data: 'Chiến lược đại dương xanh', expandedData: 'Row description' }),
+				new TableItem({ data: 'W. Chan Kim& Renee Mauborgne' }),
 				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: 'Trên kệ' }),
-				new TableItem({ data: {id: 4}, template: this.linkTemplate }),
+				new TableItem({ data: { status: 4 }, template: this.statusTemplate }),
+				new TableItem({ data: {id: 4}, template: this.actionTemplate }),
 			],
 		];
 		this.model.header = [
@@ -78,7 +88,7 @@ export class BookTableComponent implements OnInit {
 					data: {
 						id: datum.id,
 					},
-					template: this.linkTemplate
+					template: this.actionTemplate
 				})
 			]);
 		}
