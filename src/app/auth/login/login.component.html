@@ -51,7 +51,7 @@
 			<div ibmCol [columnNumbers]="{ lg: 8 }" style="padding: 0;">
 				<button *ngIf="currentState === 0" ibmButton style="width: 100%;" (click)="doSignin()" [disabled]="currentState === 1">
 					Đăng nhập
-					<svg ibmIconChevronRightGlyph size="16"></svg>
+					<svg ibmIconChevronRightGlyph class="bx--btn__icon" size="16"></svg>
 				</button>
 				<ibm-inline-loading
 					*ngIf="currentState == 1"
