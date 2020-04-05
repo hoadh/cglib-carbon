@@ -47,16 +47,16 @@ export class BookTableComponent implements OnInit {
 		const libraryId = localStorage.getItem('LIBRARY_ID');
 		this.booksService.getBooksInLibrary(libraryId).subscribe( result => {
 			this.handleResponseData(result);
+		}, error => {
+			this.showNotification('error', 'Lỗi xử lý', 'Không thể lấy thông tin sách.' +
+				' Có thể phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại và thử sau.', false);
+			this.showErrorTableData();
 		});
 	}
 
 	handleResponseData(response: HttpResult) {
 		if (response.status !== 'success') {
-			const errorData = [];
-			errorData.push([
-				new TableItem({ data: 'error!' })
-			]);
-			this.model.data = errorData;
+			this.showErrorTableData();
 		} else {
 			this.skeleton = false;
 			console.log(response);
@@ -65,6 +65,15 @@ export class BookTableComponent implements OnInit {
 			this.model.totalDataLength = this.data.length;
 			this.selectPage(1);
 		}
+	}
+
+	showErrorTableData() {
+		this.skeleton = false;
+		const errorData = [];
+		errorData.push([
+			new TableItem({ data: 'error!' })
+		]);
+		this.model.data = errorData;
 	}
 
 	prepareData(data: Book[]) {
@@ -111,16 +120,27 @@ export class BookTableComponent implements OnInit {
 		});
 	}
 
-	showNotification(type: string, title: string, message: string) {
-		this.notificationService.showNotification({
-			type: type,
-			title: title,
-			message: message,
-			target: '.notification-container',
-			duration: 4000,
-			smart: true,
-			showClose: true,
-			lowContrast: true,
-		});
+	showNotification(type: string, title: string, message: string, autoHide: boolean = true) {
+		if (autoHide) {
+			this.notificationService.showNotification({
+				type: type,
+				title: title,
+				message: message,
+				target: '.notification-container',
+				duration: 4000,
+				smart: true,
+				showClose: true,
+				lowContrast: true,
+			});
+		} else {
+			this.notificationService.showNotification({
+				type: type,
+				title: title,
+				message: message,
+				target: '.notification-container',
+				showClose: true,
+				lowContrast: true,
+			});
+		}
 	}
 }
