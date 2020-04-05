@@ -10,7 +10,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppLayoutComponent } from './_layouts/app-layout/app-layout.component';
 import { SiteLayoutComponent } from './_layouts/site-layout/site-layout.component';
-import { CoreModule } from './core/core.module';
+import { CoreModule } from './_core/core.module';
 
 import {
 	NotificationModule,

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '../_core/core.module';
 import { ChevronRightGlyphModule, ArrowRightModule } from '@carbon/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

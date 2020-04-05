@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { LOGIN_STATE } from './login-state.enum';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../_core/services/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 

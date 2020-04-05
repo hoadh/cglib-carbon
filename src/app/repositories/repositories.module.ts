@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RepositoriesRoutingModule } from './repositories-routing.module';
 import { RepoPageComponent } from './repo-page/repo-page.component';
 import { RepoTableComponent } from './repo-table/repo-table.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '../_core/core.module';
 
 @NgModule({
 	declarations: [RepoPageComponent, RepoTableComponent],
