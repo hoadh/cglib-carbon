@@ -9,6 +9,8 @@ import {
 	TableItem,
 	TableModel,
 } from 'carbon-components-angular';
+import { BooksService } from '../../_core/services/books.service';
+import { HttpResult } from '../../_models/http-result.model';
 
 @Component({
 	selector: 'app-book-table',
@@ -18,8 +20,8 @@ import {
 export class BookTableComponent implements OnInit {
 	model = new TableModel();
 	skeletonModel = Table.skeletonModel(10, 5);
-	skeleton = false;
-	data = [];
+	skeleton = true;
+	data: Book[] = [];
 
 	@ViewChild('actionTemplate', null)
 	protected actionTemplate: TemplateRef<any>;
@@ -27,47 +29,13 @@ export class BookTableComponent implements OnInit {
 	@ViewChild('statusTemplate', null)
 	protected statusTemplate: TemplateRef<any>;
 
-	constructor(private modalService: ModalService, private notificationService: NotificationService) {
-	}
+	constructor(
+		private modalService: ModalService,
+		private notificationService: NotificationService,
+		private booksService: BooksService
+	) { }
 
 	ngOnInit() {
-		this.model.data = [
-			[
-				new TableItem({ data: 'Đổi mới sáng tạo', expandedData: 'Row description' }),
-				new TableItem({ data: 'Harvard Business Review' }),
-				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: { status: 1 }, template: this.statusTemplate }),
-				new TableItem({ data: {id: 1}, template: this.actionTemplate }),
-			],
-			[
-				new TableItem({ data: 'Lãnh đạo', expandedData: 'Row description' }),
-				new TableItem({ data: 'Harvard Business Review' }),
-				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: { status: 1 }, template: this.statusTemplate }),
-				new TableItem({ data: {id: 2}, template: this.actionTemplate }),
-			],
-			[
-				new TableItem({ data: 'Marketing chiến lược', expandedData: 'Row description' }),
-				new TableItem({ data: 'Harvard Business Review' }),
-				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: { status: 3 }, template: this.statusTemplate }),
-				new TableItem({ data: {id: 3}, template: this.actionTemplate }),
-			],
-			[
-				new TableItem({ data: 'Mở rộng doanh nghiệp', expandedData: 'Row description' }),
-				new TableItem({ data: 'Verne Harnish' }),
-				new TableItem({ data: 'Marketing' }),
-				new TableItem({ data: { status: 2 }, template: this.statusTemplate }),
-				new TableItem({ data: {id: 4}, template: this.actionTemplate }),
-			],
-			[
-				new TableItem({ data: 'Chiến lược đại dương xanh', expandedData: 'Row description' }),
-				new TableItem({ data: 'W. Chan Kim& Renee Mauborgne' }),
-				new TableItem({ data: 'Quản trị, doanh nghiệp' }),
-				new TableItem({ data: { status: 4 }, template: this.statusTemplate }),
-				new TableItem({ data: {id: 4}, template: this.actionTemplate }),
-			],
-		];
 		this.model.header = [
 			new TableHeaderItem({ data: 'Tên sách' }),
 			new TableHeaderItem({ data: 'Tác giả' }),
@@ -75,8 +43,29 @@ export class BookTableComponent implements OnInit {
 			new TableHeaderItem({ data: 'Tình trạng' }),
 			new TableHeaderItem({ data: ''}),
 		];
+
+		const libraryId = localStorage.getItem('LIBRARY_ID');
+		this.booksService.getBooksInLibrary(libraryId).subscribe( result => {
+			this.handleResponseData(result);
+		});
 	}
 
+	handleResponseData(response: HttpResult) {
+		if (response.status !== 'success') {
+			const errorData = [];
+			errorData.push([
+				new TableItem({ data: 'error!' })
+			]);
+			this.model.data = errorData;
+		} else {
+			this.skeleton = false;
+			console.log(response);
+			this.data = response.data;
+			this.model.pageLength = 10;
+			this.model.totalDataLength = this.data.length;
+			this.selectPage(1);
+		}
+	}
 
 	prepareData(data: Book[]) {
 		const newData = [];

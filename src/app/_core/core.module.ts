@@ -4,6 +4,7 @@ import { CarbonAngularModule } from '../carbon-angular.module';
 import { CarbonIconsModule } from '../carbon-icons.module';
 import { AuthService } from './services/auth.service';
 import { BookStatusComponent } from './components/book-status/book-status.component';
+import { BooksService } from './services/books.service';
 
 @NgModule({
 	declarations: [BookStatusComponent],
@@ -12,7 +13,7 @@ import { BookStatusComponent } from './components/book-status/book-status.compon
 		CarbonAngularModule,
 		CarbonIconsModule
 	],
-	providers: [AuthService],
+	providers: [AuthService, BooksService],
 	exports: [
 		CarbonAngularModule,
 		CarbonIconsModule,
