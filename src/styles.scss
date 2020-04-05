@@ -32,5 +32,8 @@ $css--plex: true;
 @import "~carbon-components/scss/components/inline-loading/inline-loading";
 @import "~carbon-components/scss/components/notification/toast-notification";
 @import "~carbon-components/scss/components/notification/inline-notification";
+@import "~carbon-components/scss/components/text-input/text-input";
+@import "~carbon-components/scss/components/text-area/text-area";
+@import "~carbon-components/scss/components/select/select";
 
 @import './assets/carbon-overrides.scss';

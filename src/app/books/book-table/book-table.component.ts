@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
 	AlertModalType,
 	ModalButtonType,
@@ -11,6 +11,7 @@ import {
 } from 'carbon-components-angular';
 import { BooksService } from '../../_core/services/books.service';
 import { HttpResult } from '../../_models/http-result.model';
+import { BookModalComponent } from '../book-modal/book-modal.component';
 
 @Component({
 	selector: 'app-book-table',
@@ -32,7 +33,8 @@ export class BookTableComponent implements OnInit {
 	constructor(
 		private modalService: ModalService,
 		private notificationService: NotificationService,
-		private booksService: BooksService
+		private booksService: BooksService,
+		protected injector: Injector
 	) { }
 
 	ngOnInit() {
@@ -143,4 +145,16 @@ export class BookTableComponent implements OnInit {
 			});
 		}
 	}
+
+	openBookModal() {
+		this.modalService.create({
+			component: BookModalComponent,
+			inputs: {
+				label: '',
+				title: 'Thêm sách mới',
+				text: ``,
+			}
+		});
+	}
+
 }

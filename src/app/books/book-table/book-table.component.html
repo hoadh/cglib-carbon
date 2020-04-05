@@ -21,11 +21,11 @@
 <!--			</button>-->
 		</ibm-table-toolbar-actions>
 		<ibm-table-toolbar-content>
-			<ibm-table-toolbar-search [expandable]="true"></ibm-table-toolbar-search>
+			<ibm-table-toolbar-search [disabled]="skeleton" [expandable]="true"></ibm-table-toolbar-search>
 <!--			<button ibmButton="ghost" class="toolbar-action">-->
 <!--				<ibm-icon-settings16 class="bx&#45;&#45;toolbar-action__icon"></ibm-icon-settings16>-->
 <!--			</button>-->
-			<button ibmButton="primary" size="sm">
+			<button ibmButton="primary" size="sm" [disabled]="skeleton" (click)="openBookModal()">
 				Thêm Sách
 				<svg ibmIconAdd size="20" class="bx--btn__icon"></svg>
 			</button>
