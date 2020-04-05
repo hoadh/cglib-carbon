@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ComponentRef, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
 	AlertModalType,
 	ModalButtonType,
@@ -12,6 +12,7 @@ import {
 import { BooksService } from '../../_core/services/books.service';
 import { HttpResult } from '../../_models/http-result.model';
 import { BookModalComponent } from '../book-modal/book-modal.component';
+import { CategoriesService } from '../../_core/services/categories.service';
 
 @Component({
 	selector: 'app-book-table',
@@ -23,6 +24,8 @@ export class BookTableComponent implements OnInit {
 	skeletonModel = Table.skeletonModel(10, 5);
 	skeleton = true;
 	data: Book[] = [];
+	categories: Category[] = [];
+	private modal: ComponentRef<any>;
 
 	@ViewChild('actionTemplate', null)
 	protected actionTemplate: TemplateRef<any>;
@@ -34,10 +37,13 @@ export class BookTableComponent implements OnInit {
 		private modalService: ModalService,
 		private notificationService: NotificationService,
 		private booksService: BooksService,
-		protected injector: Injector
+		private categoriesService: CategoriesService,
 	) { }
 
 	ngOnInit() {
+		this.categoriesService.getList().subscribe( result => {
+			this.categories = result.data;
+		});
 		this.model.header = [
 			new TableHeaderItem({ data: 'Tên sách' }),
 			new TableHeaderItem({ data: 'Tác giả' }),
@@ -46,6 +52,10 @@ export class BookTableComponent implements OnInit {
 			new TableHeaderItem({ data: ''}),
 		];
 
+		this.getBooksInLibrary();
+	}
+
+	getBooksInLibrary() {
 		const libraryId = localStorage.getItem('LIBRARY_ID');
 		this.booksService.getBooksInLibrary(libraryId).subscribe( result => {
 			this.handleResponseData(result);
@@ -147,12 +157,25 @@ export class BookTableComponent implements OnInit {
 	}
 
 	openBookModal() {
-		this.modalService.create({
+		this.modal = this.modalService.create({
 			component: BookModalComponent,
 			inputs: {
 				label: '',
 				title: 'Thêm sách mới',
-				text: ``,
+				categories: this.categories,
+				onSave: (book) => this.addBook(book)
+			}
+		});
+	}
+
+	addBook(book: Book) {
+		book.status_id = 1;
+		book.library_id = Number(localStorage.getItem('LIBRARY_ID'));
+		this.booksService.add(book).subscribe(res => {
+			if (res.status === 'success') {
+				this.modal.destroy();
+				this.showNotification('success', 'Thêm sách', 'Sách đã được thêm thành công vào thư viện.', false);
+				this.getBooksInLibrary();
 			}
 		});
 	}
