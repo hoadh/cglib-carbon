@@ -7,16 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppLayoutComponent } from './_layouts/app-layout/app-layout.component';
 import { SiteLayoutComponent } from './_layouts/site-layout/site-layout.component';
 import { CoreModule } from './_core/core.module';
 
-import {
-	NotificationModule,
-	UserAvatarModule,
-	AppSwitcherModule
-} from '@carbon/icons-angular';
+import { HttpConfigInterceptor } from './_core/interceptors/http-config-interceptor';
 
 @NgModule({
 	declarations: [
@@ -30,13 +26,12 @@ import {
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		CoreModule,
-		NotificationModule,
-		UserAvatarModule,
-		AppSwitcherModule,
 		GraphQLModule,
 		HttpClientModule,
 	],
-	providers: [],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpConfigInterceptor }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

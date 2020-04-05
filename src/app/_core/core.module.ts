@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarbonAngularModule } from '../carbon-angular.module';
+import { CarbonIconsModule } from '../carbon-icons.module';
 import { AuthService } from './services/auth.service';
 import { BookStatusComponent } from './components/book-status/book-status.component';
-import { DotMarkModule } from '@carbon/icons-angular';
 
 @NgModule({
 	declarations: [BookStatusComponent],
 	imports: [
 		CommonModule,
 		CarbonAngularModule,
-		DotMarkModule
+		CarbonIconsModule
 	],
 	providers: [AuthService],
-	exports: [CarbonAngularModule, BookStatusComponent]
+	exports: [
+		CarbonAngularModule,
+		CarbonIconsModule,
+		BookStatusComponent
+	]
 })
 export class CoreModule { }
