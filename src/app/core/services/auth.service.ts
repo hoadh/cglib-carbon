@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpResult } from 'src/app/_models/http-result.model';
 
 @Injectable()
-export class AuthService extends HttpBaseService{
+export class AuthService extends HttpBaseService {
 
 	private loggedInsubject = new Subject<any>();
 
