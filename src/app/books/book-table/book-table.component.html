@@ -47,7 +47,7 @@
 		<li style="margin-right: 10px;">
 			<a ibmLink><svg ibmIconEdit size="20" class="bx--btn__icon"></svg></a>
 		</li>
-		<li>
+		<li (click)="showDeleteModal()">
 			<a ibmLink><svg ibmIconTrashCan size="20" class="bx--btn__icon"></svg></a>
 		</li>
 	</ul>
@@ -73,3 +73,5 @@
 		</ul>
 	</div>
 </ng-template>
+
+<ibm-placeholder></ibm-placeholder>

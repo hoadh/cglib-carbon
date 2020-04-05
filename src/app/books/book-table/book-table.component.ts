@@ -1,10 +1,5 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import {
-	TableModel,
-	TableItem,
-	TableHeaderItem,
-	Table,
-} from 'carbon-components-angular';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AlertModalType, ModalButtonType, ModalService, Table, TableHeaderItem, TableItem, TableModel, } from 'carbon-components-angular';
 
 @Component({
 	selector: 'app-book-table',
@@ -23,7 +18,7 @@ export class BookTableComponent implements OnInit {
 	@ViewChild('statusTemplate', null)
 	protected statusTemplate: TemplateRef<any>;
 
-	constructor() {
+	constructor(private modalService: ModalService) {
 	}
 
 	ngOnInit() {
@@ -100,5 +95,27 @@ export class BookTableComponent implements OnInit {
 		const pageRawData = this.data.slice(offset, offset + this.model.pageLength);
 		this.model.data = this.prepareData(pageRawData);
 		this.model.currentPage = page;
+	}
+
+	showDeleteModal() {
+		const SEPARATOR = '<br><br>';
+		this.modalService.show( {
+			type: AlertModalType.danger,
+			label: 'Thông tin sách',
+			title: 'Xoá sách khỏi thư viện',
+			content: 'Bạn có muốn xoá thông tin sách này khỏi thư viện?' + SEPARATOR,
+			size: 'sm',
+			buttons: [
+				{
+					text: 'Huỷ',
+					type: ModalButtonType.secondary
+				},
+				{
+					text: 'Xoá',
+					type: ModalButtonType.danger_primary,
+					click: () => alert('Xử lý thao tác xoá')
+				}
+			]
+		});
 	}
 }
