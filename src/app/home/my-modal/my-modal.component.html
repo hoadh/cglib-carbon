@@ -1,19 +1,12 @@
 <ibm-modal size="xl" (overlaySelected)="closeModal()">
 	<ibm-modal-header (closeSelect)="closeModal()">
-		{{modalTitle}}
+		<p class="bx--modal-header__label bx--type-delta">{{label}}</p>
+		<p class="bx--modal-header__heading bx--type-beta">{{ title }}</p>
 	</ibm-modal-header>
-	<section class="modal-body">
-		<h1>{{ modalHeading }}</h1>
-		<!-- <button
-			class="btn--icon-link"
-			nPopover="Hello there"
-			title="Popover title"
-			placement="right"
-			appendInline="true"
-		>
-		<ibm-icon-add size="16"></ibm-icon-add>
-		</button> -->
-		{{ modalText }}
+	<section class="bx--modal-content">
+		<p class="bx--modal-content__text">
+			{{text}}
+		</p>
 	</section>
 	<ibm-modal-footer>
 		<button ibmButton="secondary" (click)="closeModal()">

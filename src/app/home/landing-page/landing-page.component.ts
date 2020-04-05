@@ -18,9 +18,9 @@ export class LandingPageComponent implements OnInit {
 		this.modalService.create({
 			component: MyModal,
 			inputs: {
-				modalTitle: '',
-				modalHeading: 'What is Carbon?',
-				modalText: `Carbon is IBM’s open-source design system
+				label: 'Introduction',
+				title: 'What is Carbon?',
+				text: `Carbon is IBM’s open-source design system
 				for digital products and experiences. With
 				the IBM Design Language as its foundation,
 				the system consists of working code, design

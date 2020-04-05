@@ -7,14 +7,14 @@ import { BaseModal } from 'carbon-components-angular';
 	styleUrls: ['./my-modal.component.scss']
 })
 export class MyModal extends BaseModal {
-	modalTitle: string;
-	modalHeading: string;
-	modalText: string;
+	label: string;
+	title: string;
+	text: string;
 
 	constructor(protected injector: Injector) {
 		super();
-		this.modalTitle = this.injector.get('modalTitle');
-		this.modalHeading = this.injector.get('modalHeading');
-		this.modalText = this.injector.get('modalText');
+		this.label = this.injector.get('label');
+		this.title = this.injector.get('title');
+		this.text = this.injector.get('text');
 	}
 }
