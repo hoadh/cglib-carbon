@@ -17,10 +17,12 @@ export class BookModalComponent extends BaseModal {
 	onSave: Function | any;
 	bookForm: FormGroup;
 	isProcessing = false;
+	book: Book | undefined;
 
 	constructor(
 		@Inject('label') label: string,
 		@Inject('title') title: string,
+		@Inject('book') book: Book | undefined,
 		@Inject('categories') categories: Category[],
 		@Inject('onSave') onSave: Function | undefined,
 	) {
@@ -29,13 +31,21 @@ export class BookModalComponent extends BaseModal {
 		this.title = title;
 		this.categories = categories;
 		this.onSave = onSave;
-		// this.save = save;
 		this.bookForm = new FormGroup({
 			title: new FormControl(''),
 			authors: new FormControl(''),
 			category_id: new FormControl(''),
 			note: new FormControl(''),
 		});
+
+		this.book = book;
+		console.log(book);
+		if (this.book !== undefined) {
+			this.bookForm.controls.title.setValue(this.book.title);
+			this.bookForm.controls.authors.setValue(this.book.authors);
+			this.bookForm.controls.category_id.setValue(this.book.category_id);
+			this.bookForm.controls.note.setValue(this.book.note);
+		}
 	}
 
 	doSave() {

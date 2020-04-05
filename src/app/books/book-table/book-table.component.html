@@ -25,7 +25,7 @@
 <!--			<button ibmButton="ghost" class="toolbar-action">-->
 <!--				<ibm-icon-settings16 class="bx&#45;&#45;toolbar-action__icon"></ibm-icon-settings16>-->
 <!--			</button>-->
-			<button ibmButton="primary" size="sm" [disabled]="skeleton" (click)="openBookModal()">
+			<button ibmButton="primary" size="sm" [disabled]="skeleton" (click)="openNewBookModal()">
 				Thêm Sách
 				<svg ibmIconAdd size="20" class="bx--btn__icon"></svg>
 			</button>
@@ -46,7 +46,7 @@
 
 <ng-template #actionTemplate let-data="data">
 	<ul style="display: flex;" *ngIf="data.id">
-		<li style="margin-right: 10px;">
+		<li style="margin-right: 10px;" (click)="openEditBookModal(data)">
 			<a ibmLink><svg ibmIconEdit size="20" class="bx--btn__icon"></svg></a>
 		</li>
 		<li (click)="showDeleteModal()">

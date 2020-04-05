@@ -97,7 +97,7 @@ export class BookTableComponent implements OnInit {
 				new TableItem({ data: datum.authors }),
 				new TableItem({ data: datum.category.name }),
 				new TableItem({ data: { status: datum.status_id }, template: this.statusTemplate }),
-				new TableItem({ data: {id: datum.id}, template: this.actionTemplate })
+				new TableItem({ data: datum, template: this.actionTemplate })
 			]);
 		}
 		return newData;
@@ -156,12 +156,13 @@ export class BookTableComponent implements OnInit {
 		}
 	}
 
-	openBookModal() {
+	openNewBookModal() {
 		this.modal = this.modalService.create({
 			component: BookModalComponent,
 			inputs: {
 				label: '',
 				title: 'Thêm sách mới',
+				book: {},
 				categories: this.categories,
 				onSave: (book) => this.addBook(book)
 			}
@@ -172,6 +173,38 @@ export class BookTableComponent implements OnInit {
 		book.status_id = 1;
 		book.library_id = Number(localStorage.getItem('LIBRARY_ID'));
 		this.booksService.add(book).subscribe(res => {
+			if (res.status === 'success') {
+				this.modal.destroy();
+				this.showNotification('success', 'Thêm sách', 'Sách đã được thêm thành công vào thư viện.', false);
+				this.getBooksInLibrary();
+			}
+		});
+	}
+
+	openEditBookModal(book: Book) {
+		console.log(book);
+		this.modal = this.modalService.create({
+			component: BookModalComponent,
+			inputs: {
+				label: '',
+				title: 'Chỉnh sửa thông tin',
+				book: book,
+				categories: this.categories,
+				onSave: (res) => {
+					const updatedBook = book;
+					updatedBook.title = res.title;
+					updatedBook.authors = res.authors;
+					updatedBook.category_id = res.category_id;
+					updatedBook.note = res.note;
+					this.editBook(updatedBook.id, updatedBook);
+				}
+			}
+		});
+	}
+
+	editBook(bookId: number, book: Book) {
+		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
+		this.booksService.update(libraryId, bookId, book).subscribe(res => {
 			if (res.status === 'success') {
 				this.modal.destroy();
 				this.showNotification('success', 'Thêm sách', 'Sách đã được thêm thành công vào thư viện.', false);

@@ -64,7 +64,7 @@ export class BooksService extends HttpBaseService {
 		return this.http.post(`${this.apiUrl}books`, book);
 	}
 
-	public update(libraryId: string, bookId: string, book: Book): Observable<HttpResult> {
+	public update(libraryId: number, bookId: number, book: Book): Observable<HttpResult> {
 		return this.http.put(`${this.apiUrl}libraries/${libraryId}/books/${bookId}`, book);
 	}
 
