@@ -1,5 +1,14 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AlertModalType, ModalButtonType, ModalService, Table, TableHeaderItem, TableItem, TableModel, } from 'carbon-components-angular';
+import {
+	AlertModalType,
+	ModalButtonType,
+	ModalService,
+	NotificationService,
+	Table,
+	TableHeaderItem,
+	TableItem,
+	TableModel,
+} from 'carbon-components-angular';
 
 @Component({
 	selector: 'app-book-table',
@@ -18,7 +27,7 @@ export class BookTableComponent implements OnInit {
 	@ViewChild('statusTemplate', null)
 	protected statusTemplate: TemplateRef<any>;
 
-	constructor(private modalService: ModalService) {
+	constructor(private modalService: ModalService, private notificationService: NotificationService) {
 	}
 
 	ngOnInit() {
@@ -69,22 +78,16 @@ export class BookTableComponent implements OnInit {
 	}
 
 
-	prepareData(data) {
+	prepareData(data: Book[]) {
 		const newData = [];
 
 		for (const datum of data) {
 			newData.push([
-				new TableItem({ data: datum.name, expandedData: datum.description }),
-				new TableItem({ data: new Date(datum.createdAt).toLocaleDateString() }),
-				new TableItem({ data: new Date(datum.updatedAt).toLocaleDateString() }),
-				new TableItem({ data: datum.issues.totalCount }),
-				new TableItem({ data: datum.stargazers.totalCount }),
-				new TableItem({
-					data: {
-						id: datum.id,
-					},
-					template: this.actionTemplate
-				})
+				new TableItem({ data: datum.title, expandedData: datum.note }),
+				new TableItem({ data: datum.authors }),
+				new TableItem({ data: datum.category.name }),
+				new TableItem({ data: { status: datum.status_id }, template: this.statusTemplate }),
+				new TableItem({ data: {id: datum.id}, template: this.actionTemplate })
 			]);
 		}
 		return newData;
@@ -113,9 +116,22 @@ export class BookTableComponent implements OnInit {
 				{
 					text: 'Xoá',
 					type: ModalButtonType.danger_primary,
-					click: () => alert('Xử lý thao tác xoá')
+					click: () => this.showNotification('info', '', 'Đã xoá sách khỏi thư viện.')
 				}
 			]
+		});
+	}
+
+	showNotification(type: string, title: string, message: string) {
+		this.notificationService.showNotification({
+			type: type,
+			title: title,
+			message: message,
+			target: '.notification-container',
+			duration: 4000,
+			smart: true,
+			showClose: true,
+			lowContrast: true,
 		});
 	}
 }

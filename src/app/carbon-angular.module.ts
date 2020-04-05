@@ -15,7 +15,8 @@ import {
 	PaginationModule,
 	LoadingModule,
 	InlineLoadingModule,
-	SearchModule
+	SearchModule,
+	NotificationModule
 } from 'carbon-components-angular';
 
 const modules: any[] = [
@@ -34,7 +35,8 @@ const modules: any[] = [
 	LinkModule,
 	PaginationModule,
 	LoadingModule,
-	InlineLoadingModule
+	InlineLoadingModule,
+	NotificationModule
 ];
 
 @NgModule({

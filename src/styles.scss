@@ -30,5 +30,7 @@ $css--plex: true;
 @import "~carbon-components/scss/components/ui-shell/ui-shell";
 @import "~carbon-components/scss/components/loading/loading";
 @import "~carbon-components/scss/components/inline-loading/inline-loading";
+@import "~carbon-components/scss/components/notification/toast-notification";
+@import "~carbon-components/scss/components/notification/inline-notification";
 
 @import './assets/carbon-overrides.scss';
