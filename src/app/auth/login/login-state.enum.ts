@@ -3,5 +3,6 @@ export enum LOGIN_STATE {
 	DEFAULT,
 	DOING,
 	SUCCESS,
-	FAILED
+	FAILED,
+	ERROR
 }

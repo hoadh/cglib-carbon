@@ -1,4 +1,5 @@
 <div class="login-page">
+	<form [formGroup]="userForm" (ngSubmit)="doSignin()">
 	<div ibmGrid class="login-wrap">
 		<div ibmRow>
 			<div class="modal-wrap">
@@ -18,6 +19,7 @@
 									[theme]="'light'"
 									[placeholder]="'Ví dụ: thu.thu'"
 									[autocomplete]="'on'"
+									formControlName="username"
 								/>
 							</ibm-label>
 						</div>
@@ -34,6 +36,7 @@
 									[theme]="'light'"
 									[type]="'password'"
 									[autocomplete]="'on'"
+									formControlName="password"
 								/>
 							</ibm-label>
 						</div>
@@ -49,17 +52,20 @@
 				</button>
 			</div>
 			<div ibmCol [columnNumbers]="{ lg: 8 }" style="padding: 0;">
-				<button *ngIf="currentState === 0" ibmButton style="width: 100%;" (click)="doSignin()" [disabled]="currentState === 1">
+				<!-- TODO: [clean-code] compare currentState with constant instead of number -->
+				<button *ngIf="currentState == 0 || currentState == 3 || currentState == 4" ibmButton style="width: 100%;" type="submit" [disabled]="currentState === 1">
 					Đăng nhập
 					<svg ibmIconChevronRightGlyph class="bx--btn__icon" size="16"></svg>
 				</button>
 				<ibm-inline-loading
-					*ngIf="currentState == 1"
+					*ngIf="currentState == 1 || currentState == 2"
 					[loadingText]="'Đang xử lý'"
 					[successText]="'Đăng nhập thành công!'"
+					[success]="currentState == 2"
 				>
 				</ibm-inline-loading>
 			</div>
 		</div>
 	</div>
+	</form>
 </div>
