@@ -15,7 +15,6 @@ import { CoreModule } from '../_core/core.module';
 		CoreModule,
 		InfoModule,
 	],
-	exports: [MyModal],
 	entryComponents: [MyModal]
 })
 export class HomeModule { }
