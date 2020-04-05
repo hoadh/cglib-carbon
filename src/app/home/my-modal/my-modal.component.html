@@ -1,7 +1,7 @@
 <ibm-modal size="xl" (overlaySelected)="closeModal()">
-	<ibm-modal-header (closeSelect)="closeModal()">{{
-		modalTitle
-	}}</ibm-modal-header>
+	<ibm-modal-header (closeSelect)="closeModal()">
+		{{modalTitle}}
+	</ibm-modal-header>
 	<section class="modal-body">
 		<h1>{{ modalHeading }}</h1>
 		<!-- <button
@@ -15,9 +15,12 @@
 		</button> -->
 		{{ modalText }}
 	</section>
-	<ibm-modal-footer
-		><button ibmButton="primary" (click)="closeModal()">
-			Close
-		</button></ibm-modal-footer
-	>
+	<ibm-modal-footer>
+		<button ibmButton="secondary" (click)="closeModal()">
+			Cancel
+		</button>
+		<button ibmButton="primary" (click)="closeModal()">
+			Agree
+		</button>
+	</ibm-modal-footer>
 </ibm-modal>
