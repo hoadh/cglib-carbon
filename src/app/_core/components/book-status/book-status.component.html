@@ -1,0 +1,18 @@
+<div *ngIf="status" [ngSwitch]="status">
+	<ul style="display: flex;" *ngSwitchCase="1">
+		<li style="margin-right: 10px;"><svg ibmIconDotMark size="16" class="bx--btn__icon book--status__available"></svg></li>
+		<li>Có sẵn</li>
+	</ul>
+	<ul style="display: flex;" *ngSwitchCase="2">
+		<li style="margin-right: 10px;"><svg ibmIconDotMark size="16" class="bx--btn__icon book--status__borrowed"></svg></li>
+		<li>Đang mượn</li>
+	</ul>
+	<ul style="display: flex;" *ngSwitchCase="3">
+		<li style="margin-right: 10px;"><svg ibmIconDotMark size="16" class="bx--btn__icon book--status__overdue"></svg></li>
+		<li>Quá hạn trả</li>
+	</ul>
+	<ul style="display: flex;" *ngSwitchCase="4">
+		<li style="margin-right: 10px;"><svg ibmIconDotMark size="16" class="bx--btn__icon book--status__lost"></svg></li>
+		<li>Thất lạc</li>
+	</ul>
+</div>
