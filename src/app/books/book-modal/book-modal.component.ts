@@ -1,9 +1,6 @@
-import { Component, Inject, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { BaseModal } from 'carbon-components-angular';
-import { CategoriesService } from '../../_core/services/categories.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { HttpResult } from '../../_models/http-result.model';
 
 @Component({
 	selector: 'app-book-modal',
@@ -39,11 +36,10 @@ export class BookModalComponent extends BaseModal {
 		});
 
 		this.book = book;
-		console.log(book);
 		if (this.book !== undefined) {
 			this.bookForm.controls.title.setValue(this.book.title);
 			this.bookForm.controls.authors.setValue(this.book.authors);
-			this.bookForm.controls.category_id.setValue(this.book.category_id);
+			this.bookForm.controls.category_id.setValue(this.book.category.id);
 			this.bookForm.controls.note.setValue(this.book.note);
 		}
 	}

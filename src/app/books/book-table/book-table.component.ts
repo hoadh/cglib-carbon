@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ComponentRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
 	AlertModalType,
 	ModalButtonType,
@@ -25,13 +25,11 @@ export class BookTableComponent implements OnInit {
 	skeleton = true;
 	data: Book[] = [];
 	categories: Category[] = [];
+
+	@ViewChild('actionTemplate', null) protected actionTemplate: TemplateRef<any>;
+	@ViewChild('statusTemplate', null) protected statusTemplate: TemplateRef<any>;
+
 	private modal: ComponentRef<any>;
-
-	@ViewChild('actionTemplate', null)
-	protected actionTemplate: TemplateRef<any>;
-
-	@ViewChild('statusTemplate', null)
-	protected statusTemplate: TemplateRef<any>;
 
 	constructor(
 		private modalService: ModalService,
@@ -71,7 +69,6 @@ export class BookTableComponent implements OnInit {
 			this.showErrorTableData();
 		} else {
 			this.skeleton = false;
-			console.log(response);
 			this.data = response.data;
 			this.model.pageLength = 10;
 			this.model.totalDataLength = this.data.length;
@@ -162,7 +159,7 @@ export class BookTableComponent implements OnInit {
 			inputs: {
 				label: '',
 				title: 'Thêm sách mới',
-				book: {},
+				book: undefined,
 				categories: this.categories,
 				onSave: (book) => this.addBook(book)
 			}
@@ -207,7 +204,7 @@ export class BookTableComponent implements OnInit {
 		this.booksService.update(libraryId, bookId, book).subscribe(res => {
 			if (res.status === 'success') {
 				this.modal.destroy();
-				this.showNotification('success', 'Thêm sách', 'Sách đã được thêm thành công vào thư viện.', false);
+				this.showNotification('success', 'Chỉnh sửa', 'Thông tin sách đã được cập nhật thành công.', false);
 				this.getBooksInLibrary();
 			}
 		});

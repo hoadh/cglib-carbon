@@ -24,9 +24,20 @@
 					>
 				</ibm-label>
 
-				<ibm-select [label]="'Loại sách'" formControlName="category_id" [disabled]="isProcessing">
+				<ibm-select
+					[label]="'Loại sách'"
+					formControlName="category_id"
+					[disabled]="isProcessing"
+				>
 					<option value="0" selected>Chọn danh mục</option>
-					<option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+					<option
+						*ngFor="let category of categories" [value]="category.id"
+						[selected]="book !== undefined
+							&& book.category !== undefined
+							&& category.id === book.category.id"
+					>
+						{{category.name}}
+					</option>
 				</ibm-select>
 
 				<ibm-label>
