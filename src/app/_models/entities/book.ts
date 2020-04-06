@@ -7,4 +7,5 @@ interface Book {
 	library_id?: number;
 	status_id?: number;
 	note: string;
+	checked?: boolean; // using in borrow feature
 }

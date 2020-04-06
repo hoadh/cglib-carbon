@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService, NotificationService, Table, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { BooksService } from '../../_core/services/books.service';
 import { CategoriesService } from '../../_core/services/categories.service';
@@ -10,6 +10,9 @@ import { HttpResult } from '../../_models/http-result.model';
 	styleUrls: ['./borrow-table.component.scss']
 })
 export class BorrowTableComponent implements OnInit {
+
+	@Output() selectBook = new EventEmitter<Book[]>();
+
 	model = new TableModel();
 	skeletonModel = Table.skeletonModel(10, 5);
 	skeleton = true;
@@ -111,5 +114,11 @@ export class BorrowTableComponent implements OnInit {
 			]);
 		}
 		return newData;
+	}
+
+	checkBook(selectedBook: Book) {
+		selectedBook.checked = true;
+		const selectedBooks = this.data.filter( book => book.checked === true);
+		this.selectBook.emit(selectedBooks);
 	}
 }
