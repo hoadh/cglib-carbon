@@ -68,7 +68,7 @@ export class BooksService extends HttpBaseService {
 		return this.http.put(`${this.apiUrl}libraries/${libraryId}/books/${bookId}`, book);
 	}
 
-	public delete(libraryId: string, bookId: string): Observable<HttpResult> {
+	public delete(libraryId: number, bookId: number): Observable<HttpResult> {
 		return this.http.delete(`${this.apiUrl}libraries/${libraryId}/books/${bookId}`);
 	}
 

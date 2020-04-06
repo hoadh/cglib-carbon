@@ -49,7 +49,7 @@
 		<li style="margin-right: 10px;" (click)="openEditBookModal(data)">
 			<a ibmLink><svg ibmIconEdit size="20" class="bx--btn__icon"></svg></a>
 		</li>
-		<li (click)="showDeleteModal()">
+		<li (click)="showDeleteModal(data.id, data.title)">
 			<a ibmLink><svg ibmIconTrashCan size="20" class="bx--btn__icon"></svg></a>
 		</li>
 	</ul>
@@ -58,5 +58,5 @@
 <ng-template #statusTemplate let-data="data">
 	<app-book-status [status]="data.status"></app-book-status>
 </ng-template>
-
+<ibm-loading [title]="'Đang xoá sách'" [isActive]="isDeletingBook" [size]="'sm'" [overlay]="isDeletingBook"></ibm-loading>
 <ibm-placeholder></ibm-placeholder>

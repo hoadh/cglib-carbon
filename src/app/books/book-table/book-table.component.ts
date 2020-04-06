@@ -30,6 +30,7 @@ export class BookTableComponent implements OnInit {
 	@ViewChild('statusTemplate', null) protected statusTemplate: TemplateRef<any>;
 
 	private modal: ComponentRef<any>;
+	private isDeletingBook = false;
 
 	constructor(
 		private modalService: ModalService,
@@ -107,23 +108,25 @@ export class BookTableComponent implements OnInit {
 		this.model.currentPage = page;
 	}
 
-	showDeleteModal() {
+	showDeleteModal(bookId: number, bookTitle: string) {
 		const SEPARATOR = '<br><br>';
 		this.modalService.show( {
 			type: AlertModalType.danger,
 			label: 'Thông tin sách',
-			title: 'Xoá sách khỏi thư viện',
-			content: 'Bạn có muốn xoá thông tin sách này khỏi thư viện?' + SEPARATOR,
+			title: 'Xoá thông tin sách',
+			content: `Bạn có muốn xoá thông tin sách "${bookTitle}" khỏi thư viện?` + SEPARATOR,
 			size: 'sm',
 			buttons: [
 				{
 					text: 'Huỷ',
-					type: ModalButtonType.secondary
+					type: ModalButtonType.secondary,
 				},
 				{
 					text: 'Xoá',
 					type: ModalButtonType.danger_primary,
-					click: () => this.showNotification('info', '', 'Đã xoá sách khỏi thư viện.')
+					click: () => {
+						this.deleteBook(bookId, bookTitle);
+					}
 				}
 			]
 		});
@@ -172,14 +175,14 @@ export class BookTableComponent implements OnInit {
 		this.booksService.add(book).subscribe(res => {
 			if (res.status === 'success') {
 				this.modal.destroy();
-				this.showNotification('success', 'Thêm sách', 'Sách đã được thêm thành công vào thư viện.', false);
+				this.showNotification('success', 'Thêm sách',
+					'Sách đã được thêm thành công vào thư viện.', false);
 				this.getBooksInLibrary();
 			}
 		});
 	}
 
 	openEditBookModal(book: Book) {
-		console.log(book);
 		this.modal = this.modalService.create({
 			component: BookModalComponent,
 			inputs: {
@@ -204,9 +207,31 @@ export class BookTableComponent implements OnInit {
 		this.booksService.update(libraryId, bookId, book).subscribe(res => {
 			if (res.status === 'success') {
 				this.modal.destroy();
-				this.showNotification('success', 'Chỉnh sửa', 'Thông tin sách đã được cập nhật thành công.', false);
+				this.showNotification('success', 'Chỉnh sửa',
+					'Thông tin sách đã được cập nhật thành công.', false);
 				this.getBooksInLibrary();
 			}
+		});
+	}
+
+	deleteBook(bookId: number, bookTitle: string) {
+		this.isDeletingBook = true;
+		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
+		this.booksService.delete(libraryId, bookId).subscribe(res => {
+			if (res.status === 'success') {
+				this.showNotification('info', 'Xoá thông tin sách',
+					`Sách "${bookTitle}" đã được xoá khỏi thư viện.`, false);
+				this.getBooksInLibrary();
+			} else {
+				this.showNotification('error', 'Lỗi khi xoá thông tin sách',
+					`Sách "${bookTitle}" chưa được xoá khỏi thư viện. Nguyên nhân: "${res.message}."`, false);
+			}
+			this.isDeletingBook = false;
+		}, error => {
+			this.showNotification('error', 'Lỗi khi xoá thông tin sách',
+				`Sách "${bookTitle}" chưa được xoá khỏi thư viện. Có thể phiên đăng nhập đã hết hạn.' +
+				' Vui lòng đăng nhập lại và thử xoá lần nữa.`, false);
+			this.isDeletingBook = false;
 		});
 	}
 
