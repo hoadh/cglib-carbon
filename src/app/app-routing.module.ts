@@ -27,6 +27,11 @@ const routes: Routes = [
 		path: 'books',
 		loadChildren: () =>
 			import('./books/books.module').then(m => m.BooksModule),
+	},
+	{
+		path: 'borrows',
+		loadChildren: () =>
+			import('./borrows/borrows.module').then(m => m.BorrowsModule),
 	}
 ];
 

@@ -1,0 +1,33 @@
+<div class="notification-container"></div>
+
+<ibm-table-container>
+	<ibm-table-header>
+		<h4 ibmTableHeaderTitle>Chọn sách</h4>
+		<p ibmTableHeaderDescription></p>
+	</ibm-table-header>
+	<ibm-table-toolbar [model]="model">
+		<ibm-table-toolbar-content>
+			<ibm-table-toolbar-search [disabled]="skeleton" [expandable]="true"></ibm-table-toolbar-search>
+		</ibm-table-toolbar-content>
+	</ibm-table-toolbar>
+
+	<ibm-table
+		[skeleton]="skeleton"
+		[model]="skeleton ? skeletonModel : model"
+		[showSelectionColumn]="false"
+		[striped]="false">
+	</ibm-table>
+	<ibm-pagination
+		[model]="model"
+		(selectPage)="selectPage($event)">
+	</ibm-pagination>
+</ibm-table-container>
+
+<ng-template #actionTemplate let-data="data">
+	<button ibmButton="tertiary" size="sm" *ngIf="data.id">Chọn<ibm-icon-caret-right16 class="bx--btn__icon"></ibm-icon-caret-right16></button>
+</ng-template>
+
+<ng-template #statusTemplate let-data="data">
+	<app-book-status [status]="data.status"></app-book-status>
+</ng-template>
+<ibm-placeholder></ibm-placeholder>

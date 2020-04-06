@@ -1,0 +1,40 @@
+<div ibmGrid class="main-content">
+	<div ibmRow>
+		<div ibmCol [columnNumbers]="{'lg': 12}">
+			<app-borrow-table></app-borrow-table>
+		</div>
+		<div ibmCol [columnNumbers]="{'lg': 4}">
+			<div ibmRow>
+				<div ibmCol>
+					<h4>Thông tin người mượn</h4>
+					<ibm-label>
+						Họ tên
+						<input
+							ibmText
+						/>
+					</ibm-label>
+					<ibm-label>
+						Bộ phận / Lớp
+						<input
+							ibmText
+						>
+					</ibm-label>
+					<ibm-date-picker
+						label="Ngày trả (dự kiến)"
+						invalidText="Invalid date format"
+					>
+					</ibm-date-picker>
+				</div>
+			</div>
+			<div ibmRow style="min-height: 300px;">
+				<div ibmCol>
+					<h4>Sách đã chọn</h4>
+				</div>
+			</div>
+			<div ibmRow [condensed]="true">
+				<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="ghost" style="width: 100%;" (click)="previous()">Nhập lại</button></div>
+				<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="primary" style="width: 100%;" (click)="next()">Lưu</button></div>
+			</div>
+		</div>
+	</div>
+</div>

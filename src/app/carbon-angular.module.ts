@@ -4,6 +4,7 @@ import {
 	UIShellModule,
 	ButtonModule,
 	InputModule,
+	DatePickerModule,
 	SelectModule,
 	DocumentationModule,
 	GridModule,
@@ -17,7 +18,8 @@ import {
 	LoadingModule,
 	InlineLoadingModule,
 	SearchModule,
-	NotificationModule
+	NotificationModule,
+	PanelModule
 } from 'carbon-components-angular';
 
 const modules: any[] = [
@@ -25,6 +27,7 @@ const modules: any[] = [
 	UIShellModule,
 	ButtonModule,
 	InputModule,
+	DatePickerModule,
 	SelectModule,
 	DocumentationModule,
 	GridModule,
@@ -38,7 +41,8 @@ const modules: any[] = [
 	PaginationModule,
 	LoadingModule,
 	InlineLoadingModule,
-	NotificationModule
+	NotificationModule,
+	PanelModule
 ];
 
 @NgModule({

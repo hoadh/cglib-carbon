@@ -2,16 +2,10 @@
 	<ibm-header-navigation ariaLabel="Library">
 <!--		<ibm-header-item [route]="['/repos']">Repositories</ibm-header-item>-->
 		<ibm-header-item [route]="['/books']">Quản lý sách</ibm-header-item>
-		<ibm-header-item [route]="['/books']">Mượn / Trả</ibm-header-item>
-<!--		<ibm-header-item>Thống kê sách</ibm-header-item>-->
-<!--		<ibm-header-menu title="Thư viện">-->
-<!--			<ibm-header-item>Danh sách</ibm-header-item>-->
-<!--			<ibm-header-item>Thêm mới</ibm-header-item>-->
-<!--		</ibm-header-menu>-->
-<!--		<ibm-header-menu title="Thủ thư">-->
-<!--			<ibm-header-item>Danh sách</ibm-header-item>-->
-<!--			<ibm-header-item>Thêm mới</ibm-header-item>-->
-<!--		</ibm-header-menu>-->
+		<ibm-header-menu title="Mượn / Trả">
+			<ibm-header-item [route]="['/borrows']">Danh sách</ibm-header-item>
+			<ibm-header-item [route]="['/borrows/add']">Thêm mới</ibm-header-item>
+		</ibm-header-menu>
 		<ibm-header-menu title="Quản lý">
 			<ibm-header-item>Danh mục sách</ibm-header-item>
 			<ibm-header-item>Tài khoản thủ thư</ibm-header-item>
