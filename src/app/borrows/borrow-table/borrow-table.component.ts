@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService, NotificationService, Table, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { BooksService } from '../../_core/services/books.service';
 import { HttpResult } from '../../_models/http-result.model';
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 	templateUrl: './borrow-table.component.html',
 	styleUrls: ['./borrow-table.component.scss']
 })
-export class BorrowTableComponent implements OnInit {
+export class BorrowTableComponent implements OnInit, OnDestroy {
 	@Input() unselectBook: Subject<number> = null;
 	@Output() selectBook = new EventEmitter<Book[]>();
 
@@ -37,6 +37,11 @@ export class BorrowTableComponent implements OnInit {
 		];
 		this.getBooksInLibrary();
 		this.observeUnselectedBookFromInput();
+	}
+
+	ngOnDestroy(): void {
+		this.unselectBook.unsubscribe();
+		this.selectBook.unsubscribe();
 	}
 
 	observeUnselectedBookFromInput() {
