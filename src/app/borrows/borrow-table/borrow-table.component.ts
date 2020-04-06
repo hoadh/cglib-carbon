@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService, NotificationService, Table, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { BooksService } from '../../_core/services/books.service';
-import { CategoriesService } from '../../_core/services/categories.service';
 import { HttpResult } from '../../_models/http-result.model';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-borrow-table',
@@ -10,7 +10,7 @@ import { HttpResult } from '../../_models/http-result.model';
 	styleUrls: ['./borrow-table.component.scss']
 })
 export class BorrowTableComponent implements OnInit {
-
+	@Input() unselectBook: Subject<number> = null;
 	@Output() selectBook = new EventEmitter<Book[]>();
 
 	model = new TableModel();
@@ -36,6 +36,19 @@ export class BorrowTableComponent implements OnInit {
 			new TableHeaderItem({ data: ''}),
 		];
 		this.getBooksInLibrary();
+		this.observeUnselectedBookFromInput();
+	}
+
+	observeUnselectedBookFromInput() {
+		if (this.unselectBook !== undefined && this.unselectBook !== null) {
+			this.unselectBook.asObservable().subscribe( id => {
+				for (let i = 0; i < this.data.length; i++) {
+					if (this.data[i].id === id) {
+						this.data[i].checked = false;
+					}
+				}
+			});
+		}
 	}
 
 	getBooksInLibrary() {

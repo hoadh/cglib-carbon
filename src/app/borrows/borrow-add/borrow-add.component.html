@@ -1,7 +1,7 @@
 <div ibmGrid class="main-content">
 	<div ibmRow>
 		<div ibmCol [columnNumbers]="{'lg': 12}">
-			<app-borrow-table (selectBook)="setSelectedBooks($event)"></app-borrow-table>
+			<app-borrow-table [unselectBook]="unselectedBook" (selectBook)="setSelectedBooks($event)"></app-borrow-table>
 		</div>
 		<div ibmCol [columnNumbers]="{'lg': 4}">
 			<div ibmRow>
@@ -29,7 +29,11 @@
 			<div ibmRow style="min-height: 300px;">
 				<div ibmCol>
 					<h4>Sách đã chọn</h4>
-					<p *ngFor="let book of selectedBooks, index as i">{{i+1}} . {{book.title}}</p>
+					<p *ngFor="let book of selectedBooks, index as i"
+					   (click)="unselectBook(i)"
+					>
+						{{i+1}} . {{book.title}}
+					</p>
 				</div>
 			</div>
 			<div ibmRow [condensed]="true">
