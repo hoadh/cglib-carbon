@@ -130,7 +130,7 @@ export class BorrowAddComponent implements OnInit {
 			timeZone: 'Asia/Ho_Chi_Minh'
 		});
 		const date = nDate.split(',')[0].split('/');
-		return `${date[0]}-${date[0]}-${date[1]}`;
+		return `${date[2]}-${date[0]}-${date[1]}`;
 	}
 
 
