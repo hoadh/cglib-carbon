@@ -9,7 +9,8 @@ import {
 	TrashCanModule,
 	NotificationModule,
 	UserAvatarModule,
-	AppSwitcherModule
+	AppSwitcherModule,
+	ReplyModule
 } from '@carbon/icons-angular';
 
 import { PersonFavorite32Module } from '@carbon/icons-angular/lib/person--favorite/32';
@@ -28,7 +29,8 @@ const modules: any[] = [
 	Application32Module,
 	NotificationModule,
 	UserAvatarModule,
-	AppSwitcherModule
+	AppSwitcherModule,
+	ReplyModule
 ];
 
 @NgModule({

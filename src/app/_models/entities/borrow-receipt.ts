@@ -6,6 +6,7 @@ interface BorrowReceipt {
 	department: string;
 	book_id?: number;
 	books?: Book[];
+	book?: Book;
 	date_borrowed?: any;
 	date_expected_returned?: any;
 }
