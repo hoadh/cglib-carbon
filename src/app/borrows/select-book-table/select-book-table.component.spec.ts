@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BorrowTableComponent } from './borrow-table.component';
+import { SelectBookTableComponent } from './select-book-table.component';
 
 describe('BorrowTableComponent', () => {
-	let component: BorrowTableComponent;
-	let fixture: ComponentFixture<BorrowTableComponent>;
+	let component: SelectBookTableComponent;
+	let fixture: ComponentFixture<SelectBookTableComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [BorrowTableComponent]
+			declarations: [SelectBookTableComponent]
 		})
 			.compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(BorrowTableComponent);
+		fixture = TestBed.createComponent(SelectBookTableComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

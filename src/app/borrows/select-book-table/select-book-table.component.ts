@@ -5,11 +5,11 @@ import { HttpResult } from '../../_models/http-result.model';
 import { Subject } from 'rxjs';
 
 @Component({
-	selector: 'app-borrow-table',
-	templateUrl: './borrow-table.component.html',
-	styleUrls: ['./borrow-table.component.scss']
+	selector: 'app-select-book-table',
+	templateUrl: './select-book-table.component.html',
+	styleUrls: ['./select-book-table.component.scss']
 })
-export class BorrowTableComponent implements OnInit, OnDestroy {
+export class SelectBookTableComponent implements OnInit, OnDestroy {
 	@Input() unselectBook: Subject<number> = null;
 	@Output() selectBook = new EventEmitter<Book[]>();
 

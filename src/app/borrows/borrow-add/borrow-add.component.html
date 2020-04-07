@@ -2,7 +2,7 @@
 	<div ibmRow class="notification-container"></div>
 	<div ibmRow>
 		<div ibmCol [columnNumbers]="{'lg': 12}">
-			<app-borrow-table [unselectBook]="unselectedBook" (selectBook)="setSelectedBooks($event)"></app-borrow-table>
+			<app-select-book-table [unselectBook]="unselectedBook" (selectBook)="setSelectedBooks($event)"></app-select-book-table>
 		</div>
 		<div ibmCol [columnNumbers]="{'lg': 4}">
 			<form [formGroup]="borrowForm" (ngSubmit)="doSave()">
