@@ -173,7 +173,7 @@ export class BorrowTableComponent implements OnInit {
 		this.modalService.show( {
 			type: AlertModalType.danger,
 			title: 'Cập nhật trả sách sách',
-			content: `Thông tin sách "${bookTitle}" sẽ được trả về thư viện?` + SEPARATOR,
+			content: `Sách "${bookTitle}" đã được trả về thư viện?` + SEPARATOR,
 			size: 'sm',
 			buttons: [
 				{
@@ -181,7 +181,7 @@ export class BorrowTableComponent implements OnInit {
 					type: ModalButtonType.secondary,
 				},
 				{
-					text: 'Xoá',
+					text: 'Đồng ý',
 					type: ModalButtonType.primary,
 					click: () => {
 						this.returnBook(bookId, bookTitle);
