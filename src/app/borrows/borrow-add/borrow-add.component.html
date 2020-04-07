@@ -1,45 +1,57 @@
 <div ibmGrid class="main-content">
+	<div ibmRow class="notification-container"></div>
 	<div ibmRow>
 		<div ibmCol [columnNumbers]="{'lg': 12}">
 			<app-borrow-table [unselectBook]="unselectedBook" (selectBook)="setSelectedBooks($event)"></app-borrow-table>
 		</div>
 		<div ibmCol [columnNumbers]="{'lg': 4}">
-			<div ibmRow>
-				<div ibmCol>
-					<h4>Thông tin người mượn</h4>
-					<ibm-label>
-						Họ tên
-						<input
-							ibmText
-						/>
-					</ibm-label>
-					<ibm-label>
-						Bộ phận / Lớp
-						<input
-							ibmText
+			<form [formGroup]="borrowForm" (ngSubmit)="doSave()">
+				<div ibmRow>
+					<div ibmCol>
+						<h4>Thông tin người mượn</h4>
+						<ibm-label>
+							Họ tên
+							<input
+								ibmText
+								formControlName="full_name"
+								[disabled]="isProcessing"
+							/>
+						</ibm-label>
+						<ibm-label>
+							Bộ phận / Lớp
+							<input
+								ibmText
+								formControlName="department"
+								[disabled]="isProcessing"
+							>
+						</ibm-label>
+						<ibm-date-picker
+							label="Ngày trả (dự kiến)"
+							invalidText="Invalid date format"
+							formControlName="date_expected_returned"
+							[range]="false"
+							[dateFormat]="dateFormat"
+							[disabled]="isProcessing"
 						>
-					</ibm-label>
-					<ibm-date-picker
-						label="Ngày trả (dự kiến)"
-						invalidText="Invalid date format"
-					>
-					</ibm-date-picker>
+						</ibm-date-picker>
+					</div>
 				</div>
-			</div>
-			<div ibmRow style="min-height: 300px;">
-				<div ibmCol>
-					<h4>Sách đã chọn</h4>
-					<p *ngFor="let book of selectedBooks, index as i"
-					   (click)="unselectBook(i)"
-					>
-						{{i+1}} . {{book.title}}
-					</p>
+				<div ibmRow style="min-height: 300px;">
+					<div ibmCol>
+						<h4>Sách đã chọn</h4>
+						<p *ngFor="let book of selectedBooks, index as i"
+						   (click)="unselectBook(i)"
+						>
+							{{i+1}} . {{book.title}}
+						</p>
+					</div>
 				</div>
-			</div>
-			<div ibmRow [condensed]="true">
-				<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="ghost" style="width: 100%;" >Nhập lại</button></div>
-				<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="primary" style="width: 100%;" >Lưu</button></div>
-			</div>
+				<div ibmRow [condensed]="true">
+					<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="ghost" style="width: 100%;" >Nhập lại</button></div>
+					<div ibmCol [columnNumbers]="{'lg': 8}"><button ibmButton="primary" style="width: 100%;" >Lưu</button></div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
+<ibm-loading [title]="''" [isActive]="isProcessing" [size]="'sm'" [overlay]="isProcessing"></ibm-loading>

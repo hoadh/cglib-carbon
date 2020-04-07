@@ -72,22 +72,15 @@ export class BooksService extends HttpBaseService {
 		return this.http.delete(`${this.apiUrl}libraries/${libraryId}/books/${bookId}`);
 	}
 
-	public borrowBook(libraryId: string, books: Book[], customer: any, returnDay: string): Observable<HttpResult> {
-		const bookIds = [];
-		for (const key in books) {
-			if (books.hasOwnProperty(key)) {
-				const element = books[key];
-				bookIds.push({
-					id: element.id,
-					status: element.status_id
-				});
-			}
-		}
-		const borrow = {
-			customer_id: customer.id,
-			book: bookIds,
-			pay_day: returnDay
-		};
+	public borrowBook(libraryId: string, books: Book[], borrowReceipt: BorrowReceipt): Observable<HttpResult> {
+		// const borrow = {
+		// 	customer_id: borrowReceipt.customer_id,
+		// 	date_expected_returned: borrowReceipt.date_expected_returned,
+		// 	books: books,
+		// };
+
+		const borrow = borrowReceipt;
+		borrow.books = books;
 
 		return this.http.post(`${this.apiUrl}libraries/${libraryId}/borrows`, borrow);
 	}
