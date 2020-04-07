@@ -25,13 +25,13 @@ export class BorrowTableComponent implements OnInit {
 	skeleton = true;
 	data: BorrowReceipt[] = [];
 	categories: Category[] = [];
+	isUpdateReturn = false;
 
 	@ViewChild('actionTemplate', null) protected actionTemplate: TemplateRef<any>;
 	@ViewChild('statusTemplate', null) protected statusTemplate: TemplateRef<any>;
 	@ViewChild('expandedTemplate', null) protected expandedTemplate: TemplateRef<any>;
 
 	private modal: ComponentRef<any>;
-	private isUpdateReturn = false;
 
 	constructor(
 		private modalService: ModalService,

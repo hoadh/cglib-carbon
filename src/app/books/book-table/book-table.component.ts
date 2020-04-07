@@ -25,12 +25,12 @@ export class BookTableComponent implements OnInit {
 	skeleton = true;
 	data: Book[] = [];
 	categories: Category[] = [];
+	isDeletingBook = false;
 
 	@ViewChild('actionTemplate', null) protected actionTemplate: TemplateRef<any>;
 	@ViewChild('statusTemplate', null) protected statusTemplate: TemplateRef<any>;
 
 	private modal: ComponentRef<any>;
-	private isDeletingBook = false;
 
 	constructor(
 		private modalService: ModalService,

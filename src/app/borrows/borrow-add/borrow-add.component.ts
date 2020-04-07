@@ -14,9 +14,8 @@ export class BorrowAddComponent implements OnInit {
 	selectedBooks: Book[] = [];
 	unselectedBook = new Subject<number>();
 	dateFormat = 'Y-m-d';
-
-	private borrowForm: FormGroup;
-	private isProcessing = false;
+	borrowForm: FormGroup;
+	isProcessing = false;
 
 	constructor(
 		private booksService: BooksService,
