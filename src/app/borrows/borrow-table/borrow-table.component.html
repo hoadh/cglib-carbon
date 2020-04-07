@@ -24,7 +24,11 @@
 </ibm-table-container>
 
 <ng-template #actionTemplate let-data="data">
-	<button ibmButton="tertiary" size="sm" [disabled]="data.checked" (click)="checkBook(data)">Chọn<ibm-icon-caret-right16 class="bx--btn__icon"></ibm-icon-caret-right16></button>
+	<button ibmButton="tertiary" size="sm"
+			[disabled]="data.checked || data.status_id !== 1"
+			(click)="checkBook(data)">
+		Chọn<ibm-icon-caret-right16 class="bx--btn__icon"></ibm-icon-caret-right16>
+	</button>
 </ng-template>
 
 <ng-template #statusTemplate let-data="data">
