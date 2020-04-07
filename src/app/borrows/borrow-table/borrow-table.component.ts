@@ -49,7 +49,7 @@ export class BorrowTableComponent implements OnInit {
 			new TableHeaderItem({ data: 'Người mượn' }),
 			new TableHeaderItem({ data: 'Ngày trả (dự kiến)' }),
 			new TableHeaderItem({ data: 'Quá hạn' }),
-			new TableHeaderItem({ data: 'Trả sách'}),
+			new TableHeaderItem({ data: ''}),
 		];
 
 		this.getBorrowsInLibrary();
@@ -112,30 +112,6 @@ export class BorrowTableComponent implements OnInit {
 		this.model.currentPage = page;
 	}
 
-	showDeleteModal(bookId: number, bookTitle: string) {
-		const SEPARATOR = '<br><br>';
-		this.modalService.show( {
-			type: AlertModalType.danger,
-			label: 'Thông tin sách',
-			title: 'Xoá thông tin sách',
-			content: `Bạn có muốn xoá thông tin sách "${bookTitle}" khỏi thư viện?` + SEPARATOR,
-			size: 'sm',
-			buttons: [
-				{
-					text: 'Huỷ',
-					type: ModalButtonType.secondary,
-				},
-				{
-					text: 'Xoá',
-					type: ModalButtonType.danger_primary,
-					click: () => {
-						this.deleteBook(bookId, bookTitle);
-					}
-				}
-			]
-		});
-	}
-
 	showNotification(type: string, title: string, message: string, autoHide: boolean = true) {
 		if (autoHide) {
 			this.notificationService.showNotification({
@@ -160,80 +136,77 @@ export class BorrowTableComponent implements OnInit {
 		}
 	}
 
-	openNewBookModal() {
-		this.modal = this.modalService.create({
-			component: BookModalComponent,
-			inputs: {
-				label: '',
-				title: 'Thêm sách mới',
-				book: undefined,
-				categories: this.categories,
-				onSave: (book) => this.addBook(book)
-			}
-		});
-	}
+	// openEditBookModal(book: Book) {
+	// 	this.modal = this.modalService.create({
+	// 		component: BookModalComponent,
+	// 		inputs: {
+	// 			label: '',
+	// 			title: 'Chỉnh sửa thông tin',
+	// 			book: book,
+	// 			categories: this.categories,
+	// 			onSave: (res) => {
+	// 				const updatedBook = book;
+	// 				updatedBook.title = res.title;
+	// 				updatedBook.authors = res.authors;
+	// 				updatedBook.category_id = res.category_id;
+	// 				updatedBook.note = res.note;
+	// 				this.editBook(updatedBook.id, updatedBook);
+	// 			}
+	// 		}
+	// 	});
+	// }
+	//
+	// editBook(bookId: number, book: Book) {
+	// 	const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
+	// 	this.booksService.update(libraryId, bookId, book).subscribe(res => {
+	// 		if (res.status === 'success') {
+	// 			this.modal.destroy();
+	// 			this.showNotification('success', 'Chỉnh sửa',
+	// 				'Thông tin sách đã được cập nhật thành công.', false);
+	// 			this.getBorrowsInLibrary();
+	// 		}
+	// 	});
+	// }
 
-	addBook(book: Book) {
-		book.status_id = 1;
-		book.library_id = Number(localStorage.getItem('LIBRARY_ID'));
-		this.booksService.add(book).subscribe(res => {
-			if (res.status === 'success') {
-				this.modal.destroy();
-				this.showNotification('success', 'Thêm sách',
-					'Sách đã được thêm thành công vào thư viện.', false);
-				this.getBorrowsInLibrary();
-			}
-		});
-	}
-
-	openEditBookModal(book: Book) {
-		this.modal = this.modalService.create({
-			component: BookModalComponent,
-			inputs: {
-				label: '',
-				title: 'Chỉnh sửa thông tin',
-				book: book,
-				categories: this.categories,
-				onSave: (res) => {
-					const updatedBook = book;
-					updatedBook.title = res.title;
-					updatedBook.authors = res.authors;
-					updatedBook.category_id = res.category_id;
-					updatedBook.note = res.note;
-					this.editBook(updatedBook.id, updatedBook);
+	showReturnBook(bookId: number, bookTitle: string) {
+		const SEPARATOR = '<br><br>';
+		this.modalService.show( {
+			type: AlertModalType.danger,
+			title: 'Cập nhật trả sách sách',
+			content: `Thông tin sách "${bookTitle}" sẽ được trả về thư viện?` + SEPARATOR,
+			size: 'sm',
+			buttons: [
+				{
+					text: 'Huỷ',
+					type: ModalButtonType.secondary,
+				},
+				{
+					text: 'Xoá',
+					type: ModalButtonType.primary,
+					click: () => {
+						this.returnBook(bookId, bookTitle);
+					}
 				}
-			}
+			]
 		});
 	}
 
-	editBook(bookId: number, book: Book) {
-		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
-		this.booksService.update(libraryId, bookId, book).subscribe(res => {
-			if (res.status === 'success') {
-				this.modal.destroy();
-				this.showNotification('success', 'Chỉnh sửa',
-					'Thông tin sách đã được cập nhật thành công.', false);
-				this.getBorrowsInLibrary();
-			}
-		});
-	}
-
-	deleteBook(bookId: number, bookTitle: string) {
+	returnBook(borrơwId: number, bookTitle: string) {
 		this.isUpdateReturn = true;
 		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
-		this.booksService.delete(libraryId, bookId).subscribe(res => {
+		this.booksService.returnBook(libraryId, borrơwId).subscribe(res => {
 			if (res.status === 'success') {
-				this.showNotification('info', 'Xoá thông tin sách',
-					`Sách "${bookTitle}" đã được xoá khỏi thư viện.`, false);
+				this.showNotification('info', 'Cập nhật trả sách',
+					`Sách "${bookTitle}" đã được cập nhật thông tin vào thư viện.`, false);
 				this.getBorrowsInLibrary();
 			} else {
 				this.showNotification('error', 'Lỗi khi xoá thông tin sách',
-					`Sách "${bookTitle}" chưa được xoá khỏi thư viện. Nguyên nhân: "${res.message}."`, false);
+					`Sách "${bookTitle}" chưa được cập nhật thông tin. Nguyên nhân: "${res.message}."`, false);
 			}
 			this.isUpdateReturn = false;
 		}, error => {
 			this.showNotification('error', 'Lỗi khi xoá thông tin sách',
-				`Sách "${bookTitle}" chưa được xoá khỏi thư viện. Có thể phiên đăng nhập đã hết hạn.' +
+				`Sách "${bookTitle}" chưa được cập nhật thông tin. Có thể phiên đăng nhập đã hết hạn.' +
 				' Vui lòng đăng nhập lại và thử xoá lần nữa.`, false);
 			this.isUpdateReturn = false;
 		});

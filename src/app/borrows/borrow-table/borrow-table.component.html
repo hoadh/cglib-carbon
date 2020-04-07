@@ -29,7 +29,7 @@
 </ibm-table-container>
 
 <ng-template #actionTemplate let-data="data">
-	<a ibmLink *ngIf="data.id"><svg ibmIconReply size="20" class="bx--btn__icon"></svg></a>
+	<button ibmButton="ghost" size="sm" *ngIf="data.id" (click)="showReturnBook(data.id, data.book.title)">Trả sách <svg ibmIconReply size="16" class="bx--btn__icon"></svg></button>
 </ng-template>
 
 <ng-template #statusTemplate let-data="data">

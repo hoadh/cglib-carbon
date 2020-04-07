@@ -93,10 +93,7 @@ export class BooksService extends HttpBaseService {
 		return this.http.get(`${this.apiUrl}libraries/${libraryId}/books/borrow-status/0`);
 	}
 
-	public returnBook(libraryId: string, borrowingBookId: string, statusId: number): Observable<HttpResult> {
-		const returnInfo = {
-			status_book: statusId
-		};
-		return this.http.put(`${this.apiUrl}libraries/${libraryId}/borrows/${borrowingBookId}`, returnInfo);
+	public returnBook(libraryId: number, borrowingBookId: number): Observable<HttpResult> {
+		return this.http.put(`${this.apiUrl}libraries/${libraryId}/borrows/${borrowingBookId}`, {});
 	}
 }
