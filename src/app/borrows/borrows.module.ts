@@ -9,9 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectBookTableComponent } from './select-book-table/select-book-table.component';
 
 import { CaretRight16Module } from '@carbon/icons-angular/lib/caret--right/16';
+import { BorrowTableComponent } from './borrow-table/borrow-table.component';
 
 @NgModule({
-	declarations: [BorrowListComponent, BorrowAddComponent, SelectBookTableComponent],
+	declarations: [BorrowListComponent, BorrowAddComponent, SelectBookTableComponent, BorrowTableComponent],
 	imports: [
 		CommonModule,
 		CoreModule,
