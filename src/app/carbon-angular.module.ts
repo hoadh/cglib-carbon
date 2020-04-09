@@ -19,7 +19,8 @@ import {
 	InlineLoadingModule,
 	SearchModule,
 	NotificationModule,
-	PanelModule
+	PanelModule,
+	FileUploaderModule
 } from 'carbon-components-angular';
 
 const modules: any[] = [
@@ -42,7 +43,8 @@ const modules: any[] = [
 	LoadingModule,
 	InlineLoadingModule,
 	NotificationModule,
-	PanelModule
+	PanelModule,
+	FileUploaderModule,
 ];
 
 @NgModule({

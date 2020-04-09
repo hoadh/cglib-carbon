@@ -7,10 +7,11 @@ import { CoreModule } from '../_core/core.module';
 import { BookTableComponent } from './book-table/book-table.component';
 import { BookModalComponent } from './book-modal/book-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookImportModalComponent } from './book-import-modal/book-import-modal.component';
 
 
 @NgModule({
-	declarations: [BookListComponent, BookTableComponent, BookModalComponent],
+	declarations: [BookListComponent, BookTableComponent, BookModalComponent, BookImportModalComponent],
 	imports: [
 		CommonModule,
 		FormsModule,
@@ -18,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		BooksRoutingModule,
 		CoreModule,
 	],
-	entryComponents: [BookModalComponent]
+	entryComponents: [BookModalComponent, BookImportModalComponent]
 })
 export class BooksModule {
 }

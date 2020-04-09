@@ -1,0 +1,31 @@
+<ibm-modal size="xl" (overlaySelected)="closeModal()">
+	<ibm-modal-header (closeSelect)="closeModal()">
+		<p class="bx--modal-header__label bx--type-delta"></p>
+		<p class="bx--modal-header__heading bx--type-beta">Nhập sách từ file Exel</p>
+	</ibm-modal-header>
+	<section class="bx--modal-content">
+		<ibm-file-uploader
+			[title]="'Chọn file để nhập sách'"
+			[description]="'Chấp nhận đuôi file là: .xls, .xlsx'"
+			[accept]="['.xls', '.xlsx']"
+			[dropText]="'Có thể kéo và thả file Excel từ thư mục vào đây để nhập sách'"
+			[drop]="true"
+			[multiple]="false"
+			[(files)]="files"
+		>
+		</ibm-file-uploader>
+		<br/><br/>
+	</section>
+	<ibm-modal-footer>
+		<button ibmButton="secondary" (click)="closeModal()">
+			Huỷ
+		</button>
+		<button ibmButton="primary" type="button" *ngIf="!isProcessing" (click)="doImport()">
+			Nhập sách
+		</button>
+		<ibm-inline-loading
+			*ngIf="isProcessing"
+			[loadingText]="'Đang xử lý'">
+		</ibm-inline-loading>
+	</ibm-modal-footer>
+</ibm-modal>
