@@ -23,7 +23,7 @@ import { BookImportModalComponent } from '../book-import-modal/book-import-modal
 export class BookTableComponent implements OnInit {
 	model = new TableModel();
 	skeletonModel = Table.skeletonModel(10, 5);
-	skeleton = false;
+	skeleton = true;
 	data: Book[] = [];
 	categories: Category[] = [];
 	isDeletingBook = false;
