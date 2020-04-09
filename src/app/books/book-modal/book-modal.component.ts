@@ -24,7 +24,7 @@ export class BookModalComponent extends BaseModal {
 		@Inject('book') book: Book | undefined,
 		@Inject('categories') categories: Category[],
 		@Inject('onSave') onSave: Function | undefined,
-		@Inject('secondaryLabel') secondaryLabel: string,
+		@Inject('secondaryLabel') secondaryLabel: string | undefined,
 		@Inject('doSecondary') doSecondary: Function | undefined,
 	) {
 		super();

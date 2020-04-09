@@ -224,6 +224,8 @@ export class BookTableComponent implements OnInit {
 				title: 'Chỉnh sửa thông tin',
 				book: book,
 				categories: this.categories,
+				secondaryLabel: 'Huỷ',
+				doSecondary: () => {},
 				onSave: (res) => {
 					const updatedBook = book;
 					updatedBook.title = res.title;
