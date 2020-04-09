@@ -85,7 +85,7 @@ export class BooksService extends HttpBaseService {
 		return this.http.post(`${this.apiUrl}libraries/${libraryId}/borrows`, borrow);
 	}
 
-	public getBorrowingList(libraryId: string): Observable<HttpResult> {
+	public getBorrowingList(libraryId: number): Observable<HttpResult> {
 		return this.http.get(`${this.apiUrl}libraries/${libraryId}/borrows`);
 	}
 

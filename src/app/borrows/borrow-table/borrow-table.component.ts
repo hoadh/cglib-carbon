@@ -12,14 +12,14 @@ import {
 import { BooksService } from '../../_core/services/books.service';
 import { CategoriesService } from '../../_core/services/categories.service';
 import { HttpResult } from '../../_models/http-result.model';
-import { BookModalComponent } from '../../books/book-modal/book-modal.component';
+
 @Component({
 	selector: 'app-borrow-table',
 	templateUrl: './borrow-table.component.html',
 	styleUrls: ['./borrow-table.component.scss']
 })
 export class BorrowTableComponent implements OnInit {
-
+	libraryId: number;
 	model = new TableModel();
 	skeletonModel = Table.skeletonModel(10, 5);
 	skeleton = true;
@@ -41,6 +41,7 @@ export class BorrowTableComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		this.libraryId = Number(localStorage.getItem('LIBRARY_ID'));
 		this.categoriesService.getList().subscribe( result => {
 			this.categories = result.data;
 		});
@@ -56,8 +57,7 @@ export class BorrowTableComponent implements OnInit {
 	}
 
 	getBorrowsInLibrary() {
-		const libraryId = localStorage.getItem('LIBRARY_ID');
-		this.booksService.getBorrowingList(libraryId).subscribe( result => {
+		this.booksService.getBorrowingList(this.libraryId).subscribe( result => {
 			this.handleResponseData(result);
 		}, error => {
 			this.showNotification('error', 'Lỗi xử lý', 'Không thể lấy thông tin sách.' +
@@ -196,14 +196,17 @@ export class BorrowTableComponent implements OnInit {
 		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
 		this.booksService.returnBook(libraryId, borrơwId).subscribe(res => {
 			if (res.status === 'success') {
-				this.showNotification('info', 'Cập nhật trả sách',
-					`Sách "${bookTitle}" đã được cập nhật thông tin vào thư viện.`, false);
-				this.getBorrowsInLibrary();
+				this.booksService.getBorrowingList(this.libraryId).subscribe( result => {
+					this.handleResponseData(result);
+					this.showNotification('info', 'Cập nhật trả sách',
+						`Sách "${bookTitle}" đã được cập nhật thông tin vào thư viện.`, false);
+					this.isUpdateReturn = false;
+				}, error => {});
 			} else {
 				this.showNotification('error', 'Lỗi khi xoá thông tin sách',
 					`Sách "${bookTitle}" chưa được cập nhật thông tin. Nguyên nhân: "${res.message}."`, false);
+				this.isUpdateReturn = false;
 			}
-			this.isUpdateReturn = false;
 		}, error => {
 			this.showNotification('error', 'Lỗi khi xoá thông tin sách',
 				`Sách "${bookTitle}" chưa được cập nhật thông tin. Có thể phiên đăng nhập đã hết hạn.' +
