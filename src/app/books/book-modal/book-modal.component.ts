@@ -12,6 +12,8 @@ export class BookModalComponent extends BaseModal {
 	title: string;
 	categories: Category[] = [];
 	onSave: Function | any;
+	secondaryLabel: string;
+	onSecondary: Function | any;
 	bookForm: FormGroup;
 	isProcessing = false;
 	book: Book | undefined;
@@ -22,12 +24,17 @@ export class BookModalComponent extends BaseModal {
 		@Inject('book') book: Book | undefined,
 		@Inject('categories') categories: Category[],
 		@Inject('onSave') onSave: Function | undefined,
+		@Inject('secondaryLabel') secondaryLabel: string,
+		@Inject('doSecondary') doSecondary: Function | undefined,
 	) {
 		super();
 		this.label = label;
 		this.title = title;
 		this.categories = categories;
 		this.onSave = onSave;
+		this.secondaryLabel = (secondaryLabel) ? secondaryLabel : 'Huỷ';
+		this.onSecondary = doSecondary;
+
 		this.bookForm = new FormGroup({
 			title: new FormControl(''),
 			authors: new FormControl(''),
@@ -49,6 +56,13 @@ export class BookModalComponent extends BaseModal {
 			this.isProcessing = true;
 			this.onSave(this.bookForm.value);
 		}
+	}
+
+	doSecondary() {
+		if (this.onSecondary != undefined && this.onSecondary instanceof Function) {
+			this.onSecondary();
+		}
+		this.closeModal();
 	}
 
 

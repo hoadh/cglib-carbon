@@ -13,6 +13,7 @@ import { BooksService } from '../../_core/services/books.service';
 import { HttpResult } from '../../_models/http-result.model';
 import { BookModalComponent } from '../book-modal/book-modal.component';
 import { CategoriesService } from '../../_core/services/categories.service';
+import { BookImportModalComponent } from '../book-import-modal/book-import-modal.component';
 
 @Component({
 	selector: 'app-book-table',
@@ -22,7 +23,7 @@ import { CategoriesService } from '../../_core/services/categories.service';
 export class BookTableComponent implements OnInit {
 	model = new TableModel();
 	skeletonModel = Table.skeletonModel(10, 5);
-	skeleton = true;
+	skeleton = false;
 	data: Book[] = [];
 	categories: Category[] = [];
 	isDeletingBook = false;
@@ -51,7 +52,7 @@ export class BookTableComponent implements OnInit {
 			new TableHeaderItem({ data: ''}),
 		];
 
-		this.getBooksInLibrary();
+		// this.getBooksInLibrary();
 	}
 
 	getBooksInLibrary() {
@@ -164,6 +165,17 @@ export class BookTableComponent implements OnInit {
 				title: 'Thêm sách mới',
 				book: undefined,
 				categories: this.categories,
+				secondaryLabel: 'Nhập sách từ Excel',
+				doSecondary: () => this.openImportBooksModal(),
+				onSave: (book) => this.addBook(book)
+			}
+		});
+	}
+
+	openImportBooksModal() {
+		this.modal = this.modalService.create({
+			component: BookImportModalComponent,
+			inputs: {
 				onSave: (book) => this.addBook(book)
 			}
 		});

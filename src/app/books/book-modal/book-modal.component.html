@@ -55,8 +55,8 @@
 			<br/><br/>
 		</section>
 		<ibm-modal-footer>
-			<button ibmButton="secondary" (click)="closeModal()">
-				Huỷ
+			<button ibmButton="secondary" (click)="doSecondary()">
+				{{secondaryLabel}}
 			</button>
 			<button ibmButton="primary" type="submit" *ngIf="!isProcessing">
 				Lưu
