@@ -87,6 +87,8 @@ export class BorrowAddComponent implements OnInit {
 						'succes',
 						'Thêm phiếu mượn',
 						'Đã tạo phiếu mượn thành công. Bạn có thể xem lại tại đây: ...');
+					this.borrowForm.reset();
+					this.selectedBooks = [];
 				} else {
 					this.showNotification(
 						'error',
