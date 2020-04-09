@@ -96,4 +96,11 @@ export class BooksService extends HttpBaseService {
 	public returnBook(libraryId: number, borrowingBookId: number): Observable<HttpResult> {
 		return this.http.put(`${this.apiUrl}libraries/${libraryId}/borrows/${borrowingBookId}`, {});
 	}
+
+	public importBooks(libraryId: number, books: FormData): Observable<HttpResult> {
+		const headers = this.getHeaders();
+		headers.append('Content-Type', 'multipart/form-data');
+		headers.append('Accept', 'application/json');
+		return this.http.post(`${this.apiUrl}libraries/${libraryId}/books/import`, books, { headers });
+	}
 }

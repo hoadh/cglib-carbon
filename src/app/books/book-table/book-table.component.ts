@@ -52,7 +52,7 @@ export class BookTableComponent implements OnInit {
 			new TableHeaderItem({ data: ''}),
 		];
 
-		// this.getBooksInLibrary();
+		this.getBooksInLibrary();
 	}
 
 	getBooksInLibrary() {
@@ -172,15 +172,6 @@ export class BookTableComponent implements OnInit {
 		});
 	}
 
-	openImportBooksModal() {
-		this.modal = this.modalService.create({
-			component: BookImportModalComponent,
-			inputs: {
-				onSave: (book) => this.addBook(book)
-			}
-		});
-	}
-
 	addBook(book: Book) {
 		book.status_id = 1;
 		book.library_id = Number(localStorage.getItem('LIBRARY_ID'));
@@ -191,6 +182,37 @@ export class BookTableComponent implements OnInit {
 					'Sách đã được thêm thành công vào thư viện.', false);
 				this.getBooksInLibrary();
 			}
+		});
+	}
+
+	openImportBooksModal() {
+		this.modal = this.modalService.create({
+			component: BookImportModalComponent,
+			inputs: {
+				onSave: (file: File) => this.importFile(file)
+			}
+		});
+	}
+
+	importFile(file: File) {
+		const myFormData = new FormData();
+		myFormData.append('file', file);
+		const libraryId = Number(localStorage.getItem('LIBRARY_ID'));
+		this.booksService.importBooks(libraryId, myFormData).subscribe( result => {
+			const status = result.status;
+			if (status === 'success') {
+				this.modal.destroy();
+				this.showNotification('info', 'Nhập sách',
+					`Sách từ file ${file.name} đã được đưa vào thư viện.`, false);
+				this.getBooksInLibrary();
+			} else {
+				this.showNotification('error', 'Lỗi nhập sách',
+					`Sách từ file ${file.name} chưa được đưa vào thư viện. Nguyên nhân: "${result.message}."`, false);
+			}
+		}, error => {
+			this.showNotification('error', 'Lỗi nhập sách',
+				`Sách từ file ${file.name} chưa được đưa vào thư viện. Có thể phiên đăng nhập đã hết hạn.' +
+				' Vui lòng đăng nhập lại và thử xoá lần nữa.`, false);
 		});
 	}
 

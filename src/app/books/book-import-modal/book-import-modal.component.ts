@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseModal } from 'carbon-components-angular';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-book-import-modal',
@@ -8,6 +9,7 @@ import { BaseModal } from 'carbon-components-angular';
 	styleUrls: ['./book-import-modal.component.scss']
 })
 export class BookImportModalComponent extends BaseModal {
+	downloadUrl = environment.apiUrl + 'download-excel-sample';
 	onSave: Function | any;
 	isProcessing = false;
 	files = new Set();
@@ -22,9 +24,8 @@ export class BookImportModalComponent extends BaseModal {
 	doImport() {
 		this.isProcessing = true;
 		this.files.forEach(fileObj => {
-			console.log(fileObj);
 			if (!fileObj['uploaded']) {
-				console.log(fileObj['file']);
+				this.onSave(fileObj['file']);
 			}
 		});
 	}
