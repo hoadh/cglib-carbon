@@ -1,11 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyModal } from './my-modal.component';
-import {
-	ModalModule,
-	PlaceholderModule,
-} from 'carbon-components-angular';
-import { Injector } from '@angular/core';
+import { ModalModule } from 'carbon-components-angular';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MyModalComponent', () => {
 	let component: MyModal;
@@ -14,10 +11,13 @@ describe('MyModalComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [MyModal],
-			imports: [ModalModule, PlaceholderModule ],
-			providers: [{provide: 'modalText', useValue: 'test'}]
-		})
-			.compileComponents();
+			imports: [ModalModule, NoopAnimationsModule],
+			providers: [
+				{provide: 'label', useValue: 'label'},
+				{provide: 'title', useValue: 'title'},
+				{provide: 'text', useValue: 'text'},
+			]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

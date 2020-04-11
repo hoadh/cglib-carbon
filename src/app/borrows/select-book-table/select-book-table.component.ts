@@ -41,7 +41,9 @@ export class SelectBookTableComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.unselectBook.unsubscribe();
+		if (this.unselectBook != null) {
+			this.unselectBook.unsubscribe();
+		}
 		this.selectBook.unsubscribe();
 	}
 
@@ -65,6 +67,7 @@ export class SelectBookTableComponent implements OnInit, OnDestroy {
 			this.showNotification('error', 'Lỗi xử lý', 'Không thể lấy thông tin sách.' +
 				' Có thể phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại và thử sau.', false);
 			this.showErrorTableData();
+			console.log(error);
 		});
 	}
 

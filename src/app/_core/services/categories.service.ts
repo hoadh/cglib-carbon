@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpResult } from '../../_models/http-result.model';
 
 @Injectable()
-export class CategoriesService extends HttpBaseService{
+export class CategoriesService extends HttpBaseService {
 	public add(category: any): Observable<HttpResult> {
 		return this.http.post(`${this.apiUrl}categories`, category);
 	}
