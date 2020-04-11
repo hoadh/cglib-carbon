@@ -87,8 +87,7 @@ export class BorrowAddComponent implements OnInit {
 						'succes',
 						'Thêm phiếu mượn',
 						'Đã tạo phiếu mượn thành công. Bạn có thể xem lại tại đây: ...');
-					this.borrowForm.reset();
-					this.selectedBooks = [];
+					this.resetForm();
 				} else {
 					this.showNotification(
 						'error',
@@ -134,5 +133,9 @@ export class BorrowAddComponent implements OnInit {
 		return `${date[2]}-${date[0]}-${date[1]}`;
 	}
 
+	resetForm() {
+		this.borrowForm.reset();
+		this.selectedBooks = [];
+	}
 
 }
