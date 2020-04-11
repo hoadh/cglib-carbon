@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectBookTableComponent } from './select-book-table.component';
+import { BorrowTableComponent } from '../borrow-table/borrow-table.component';
+import { CoreModule } from '../../_core/core.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BorrowTableComponent', () => {
 	let component: SelectBookTableComponent;
@@ -8,9 +11,12 @@ describe('BorrowTableComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [SelectBookTableComponent]
-		})
-			.compileComponents();
+			declarations: [SelectBookTableComponent],
+			imports: [
+				CoreModule,
+				HttpClientTestingModule
+			]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
