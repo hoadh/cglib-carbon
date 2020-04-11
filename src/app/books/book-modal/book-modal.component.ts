@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { BaseModal } from 'carbon-components-angular';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Category } from '../../_models/entities/category';
+import { Book } from '../../_models/entities/book';
 
 @Component({
 	selector: 'app-book-modal',

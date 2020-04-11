@@ -12,6 +12,8 @@ import {
 import { BooksService } from '../../_core/services/books.service';
 import { CategoriesService } from '../../_core/services/categories.service';
 import { HttpResult } from '../../_models/http-result.model';
+import { BorrowReceipt } from '../../_models/entities/borrow-receipt';
+import { Category } from '../../_models/entities/category';
 
 @Component({
 	selector: 'app-borrow-table',

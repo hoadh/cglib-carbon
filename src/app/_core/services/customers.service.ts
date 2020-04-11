@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpResult } from '../../_models/http-result.model';
 import { HttpBaseService } from './http-base.service';
+import { Customer } from '../../_models/entities/customer';
 
 @Injectable({
 	providedIn: 'root'

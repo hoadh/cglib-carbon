@@ -4,6 +4,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BooksService } from '../../_core/services/books.service';
 import { CustomersService } from '../../_core/services/customers.service';
 import { NotificationService } from 'carbon-components-angular';
+import { BorrowReceipt } from '../../_models/entities/borrow-receipt';
+import { Book } from '../../_models/entities/book';
 
 @Component({
 	selector: 'app-borrow-add',

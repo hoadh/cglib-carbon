@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpBaseService } from './http-base.service';
 import { Observable } from 'rxjs';
 import { HttpResult } from '../../_models/http-result.model';
+import { Book } from '../../_models/entities/book';
+import { BorrowReceipt } from '../../_models/entities/borrow-receipt';
 
 @Injectable()
 export class BooksService extends HttpBaseService {

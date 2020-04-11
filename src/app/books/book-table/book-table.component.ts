@@ -14,6 +14,8 @@ import { HttpResult } from '../../_models/http-result.model';
 import { BookModalComponent } from '../book-modal/book-modal.component';
 import { CategoriesService } from '../../_core/services/categories.service';
 import { BookImportModalComponent } from '../book-import-modal/book-import-modal.component';
+import { Book } from '../../_models/entities/book';
+import { Category } from '../../_models/entities/category';
 
 @Component({
 	selector: 'app-book-table',

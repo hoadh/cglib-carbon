@@ -1,4 +1,6 @@
-interface BorrowReceipt {
+import { Book } from './book';
+
+export interface BorrowReceipt {
 	id?: number;
 	// customer_id?: number;
 	// customer?: Customer;

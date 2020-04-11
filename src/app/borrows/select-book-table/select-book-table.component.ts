@@ -3,6 +3,7 @@ import { ModalService, NotificationService, Table, TableHeaderItem, TableItem, T
 import { BooksService } from '../../_core/services/books.service';
 import { HttpResult } from '../../_models/http-result.model';
 import { Subject } from 'rxjs';
+import { Book } from '../../_models/entities/book';
 
 @Component({
 	selector: 'app-select-book-table',
