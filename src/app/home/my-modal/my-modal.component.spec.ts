@@ -4,7 +4,7 @@ import { MyModal } from './my-modal.component';
 import { ModalModule } from 'carbon-components-angular';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('MyModalComponent', () => {
+fdescribe('MyModalComponent', () => {
 	let component: MyModal;
 	let fixture: ComponentFixture<MyModal>;
 
