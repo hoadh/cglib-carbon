@@ -62,12 +62,11 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng test --code-coverage` to show coverage summary: 
 =============================== Coverage summary ===============================
-Statements   : 39.62% ( 210/530 )
+Statements   : 40% ( 212/530 )
 Branches     : 10.87% ( 10/92 )
-Functions    : 28.99% ( 49/169 )
-Lines        : 35.86% ( 175/488 )
+Functions    : 30.18% ( 51/169 )
+Lines        : 36.27% ( 177/488 )
 ================================================================================
-
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

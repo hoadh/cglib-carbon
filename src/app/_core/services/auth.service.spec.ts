@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AuthService } from './auth.service';
 import { environment } from '../../../environments/environment';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
 	let service: AuthService;
 	let httpMock: HttpTestingController;
 	const apiUrl = environment.apiUrl;
@@ -18,10 +18,12 @@ fdescribe('AuthService', () => {
 		});
 		service = TestBed.get(AuthService);
 		httpMock = TestBed.get(HttpTestingController);
+		localStorage.clear();
 	});
 
 	afterEach(() => {
 		httpMock.verify();
+		localStorage.clear();
 	});
 
 	it('should be created', () => {
@@ -29,7 +31,7 @@ fdescribe('AuthService', () => {
 	});
 
 	describe('#login', () => {
-		it('should login with valid username and password', () => {
+		it('should login with valid credential', () => {
 
 			// Arrange
 			const user = { username: 'username', password: 'password' };
@@ -40,11 +42,32 @@ fdescribe('AuthService', () => {
 
 			// Act && Assert
 			service.login(user.username, user.password).subscribe( bRes => {
-				expect(bRes).toBeTruthy();
+				expect(bRes).toEqual(true);
+				expect(localStorage.getItem('ACCESS_TOKEN')).toEqual(mockLoginResponse.data.token);
+
 				// TODO: Refactor login method
 				// expect(res.status).toBe(mockLoginResponse.status);
 				// expect(res.data).toBeTruthy();
 				// expect(res.data.token).toBe(mockLoginResponse.data.token);
+			});
+
+			const req = httpMock.expectOne(`${apiUrl}login`);
+			expect(req.request.method).toBe('POST');
+			expect(req.request.body).toEqual(user);
+			req.flush(mockLoginResponse);
+		});
+
+		it('should not login with invalid credential', () => {
+
+			// Arrange
+			const user = { username: '', password: '' };
+			const mockLoginResponse = {
+				status: 'error'
+			};
+
+			// Act && Assert
+			service.login(user.username, user.password).subscribe( bRes => {
+				expect(bRes).toEqual(false);
 			});
 
 			const req = httpMock.expectOne(`${apiUrl}login`);
