@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
 	let service: AuthService;
-	let httpMock: HttpTestingController;
+	let mockBackend: HttpTestingController;
 	const apiUrl = environment.apiUrl;
 
 	beforeEach(() => {
@@ -17,12 +17,11 @@ describe('AuthService', () => {
 			providers: [AuthService]
 		});
 		service = TestBed.get(AuthService);
-		httpMock = TestBed.get(HttpTestingController);
+		mockBackend = TestBed.get(HttpTestingController);
 		localStorage.clear();
 	});
 
 	afterEach(() => {
-		httpMock.verify();
 		localStorage.clear();
 	});
 
@@ -51,7 +50,7 @@ describe('AuthService', () => {
 				// expect(res.data.token).toBe(mockLoginResponse.data.token);
 			});
 
-			const req = httpMock.expectOne(`${apiUrl}login`);
+			const req = mockBackend.expectOne(`${apiUrl}login`);
 			expect(req.request.method).toBe('POST');
 			expect(req.request.body).toEqual(user);
 			req.flush(mockLoginResponse);
@@ -70,10 +69,26 @@ describe('AuthService', () => {
 				expect(bRes).toEqual(false);
 			});
 
-			const req = httpMock.expectOne(`${apiUrl}login`);
+			const req = mockBackend.expectOne(`${apiUrl}login`);
+			req.flush(mockLoginResponse);
 			expect(req.request.method).toBe('POST');
 			expect(req.request.body).toEqual(user);
-			req.flush(mockLoginResponse);
+		});
+	});
+
+	describe('#logout', () => {
+		it('should make request to logout url', () => {
+			const mockLogoutResponse = {};
+
+			service.logout().subscribe( res => {
+				expect(res).toBeTruthy();
+				expect(localStorage.getItem('ACCESS_TOKEN')).toBeNull(); // make sure access token is cleared!
+			});
+
+			const req = mockBackend.expectOne({ url: `${apiUrl}logout`, method: 'POST'} );
+			req.flush(mockLogoutResponse);
+			expect(req.request.body).toBeTruthy();
+			mockBackend.verify();
 		});
 	});
 });
