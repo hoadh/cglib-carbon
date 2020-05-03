@@ -54,6 +54,10 @@ describe('BookModalComponent', () => {
 		}).compileComponents();
 	}));
 
+	afterEach(() => {
+		fixture.destroy();
+	});
+
 	beforeEach(() => {
 		fixture = TestBed.createComponent(BookModalComponent);
 		component = fixture.componentInstance;

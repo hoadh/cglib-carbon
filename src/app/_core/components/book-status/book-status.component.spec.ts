@@ -3,23 +3,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookStatusComponent } from './book-status.component';
 
 describe('BookStatusComponent', () => {
-  let component: BookStatusComponent;
-  let fixture: ComponentFixture<BookStatusComponent>;
+	let component: BookStatusComponent;
+	let fixture: ComponentFixture<BookStatusComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BookStatusComponent ]
-    })
-    .compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [BookStatusComponent]
+		})
+			.compileComponents();
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BookStatusComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(BookStatusComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	afterEach(() => {
+		fixture.destroy();
+	});
+
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });
