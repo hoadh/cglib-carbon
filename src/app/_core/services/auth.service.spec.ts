@@ -38,22 +38,25 @@ describe('AuthService', () => {
 				status: 'success',
 				data: { token: 'TEST_ACCESS_TOKEN' }
 			};
+			let loginResponse;
 
-			// Act && Assert
+			// Act
 			service.login(user.username, user.password).subscribe( bRes => {
-				expect(bRes).toEqual(true);
-				expect(localStorage.getItem('ACCESS_TOKEN')).toEqual(mockLoginResponse.data.token);
-
-				// TODO: Refactor login method
-				// expect(res.status).toBe(mockLoginResponse.status);
-				// expect(res.data).toBeTruthy();
-				// expect(res.data.token).toBe(mockLoginResponse.data.token);
+				loginResponse = bRes;
 			});
 
-			const req = mockBackend.expectOne(`${apiUrl}login`);
-			expect(req.request.method).toBe('POST');
-			expect(req.request.body).toEqual(user);
+			// Assert
+			const req = mockBackend.expectOne({ url: `${apiUrl}login`, method: 'POST' });
 			req.flush(mockLoginResponse);
+			expect(loginResponse).toEqual(true);
+			expect(req.request.body).toEqual(user);
+			expect(localStorage.getItem('ACCESS_TOKEN')).toEqual(mockLoginResponse.data.token);
+			/*
+			// TODO: Refactor login method
+			expect(res.status).toBe(mockLoginResponse.status);
+			expect(res.data).toBeTruthy();
+			expect(res.data.token).toBe(mockLoginResponse.data.token);
+			*/
 		});
 
 		it('should not login with invalid credential', () => {
@@ -63,31 +66,39 @@ describe('AuthService', () => {
 			const mockLoginResponse = {
 				status: 'error'
 			};
+			let loginResponse;
 
-			// Act && Assert
+			// Act
 			service.login(user.username, user.password).subscribe( bRes => {
-				expect(bRes).toEqual(false);
+				loginResponse = bRes;
 			});
 
-			const req = mockBackend.expectOne(`${apiUrl}login`);
+			// Assert
+			const req = mockBackend.expectOne({ url: `${apiUrl}login`, method: 'POST' });
 			req.flush(mockLoginResponse);
-			expect(req.request.method).toBe('POST');
+			expect(loginResponse).toEqual(false);
 			expect(req.request.body).toEqual(user);
 		});
 	});
 
 	describe('#logout', () => {
 		it('should make request to logout url', () => {
-			const mockLogoutResponse = {};
 
+			// Arrange
+			const mockLogoutResponse = {};
+			let logoutRes;
+
+			// Act
 			service.logout().subscribe( res => {
-				expect(res).toBeTruthy();
-				expect(localStorage.getItem('ACCESS_TOKEN')).toBeNull(); // make sure access token is cleared!
+				logoutRes = res;
 			});
 
+			// Assert
 			const req = mockBackend.expectOne({ url: `${apiUrl}logout`, method: 'POST'} );
 			req.flush(mockLogoutResponse);
 			expect(req.request.body).toBeTruthy();
+			expect(logoutRes).toBeTruthy();
+			expect(localStorage.getItem('ACCESS_TOKEN')).toBeNull(); // make sure access token is cleared!
 			mockBackend.verify();
 		});
 	});
