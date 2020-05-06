@@ -7,17 +7,17 @@ import { HttpResult } from 'src/app/_models/http-result.model';
 @Injectable()
 export class AuthService extends HttpBaseService {
 
-	private loggedInsubject = new Subject<any>();
+	// private loggedInsubject = new Subject<any>();
 
 	logout() {
 		return this.http.post(`${this.apiUrl}logout`, { headers: this.getHeaders() }).pipe(
 			map(result => {
 				localStorage.clear();
-				this.loggedInsubject.next(false);
+				// this.loggedInsubject.next(false);
 				return result;
 			}, error => {
 				localStorage.clear();
-				this.loggedInsubject.next(false);
+				// this.loggedInsubject.next(false);
 				catchError(this.handleError('logout', null));
 				return error;
 			})
@@ -36,7 +36,7 @@ export class AuthService extends HttpBaseService {
 						bRes = false;
 					} else {
 						localStorage.setItem('ACCESS_TOKEN', result.data.token);
-						this.loggedInsubject.next(true);
+						// this.loggedInsubject.next(true);
 						bRes = true;
 					}
 					return bRes;
@@ -57,13 +57,6 @@ export class AuthService extends HttpBaseService {
 			.pipe(
 				catchError(this.handleError('changePassword', null))
 			);
-	}
-
-	isLoggedIn(): boolean {
-		const token = localStorage.getItem('ACCESS_TOKEN');
-		const isValidToken = (token !== undefined && token !== null && token !== '');
-		this.loggedInsubject.next(isValidToken);
-		return isValidToken;
 	}
 
 	getProfile(): Observable<any> {

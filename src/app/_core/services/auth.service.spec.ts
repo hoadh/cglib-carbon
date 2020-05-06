@@ -121,4 +121,21 @@ describe('AuthService', () => {
 			mockBackend.verify();
 		});
 	});
+
+	describe('#getProfile', () => {
+		it('should make request to `me` for getting profile', () => {
+			// Arrange
+			const mockResponse = {};
+			let profileRes;
+
+			// Act
+			service.getProfile().subscribe( res => profileRes = res);
+
+			// Assert
+			const req = mockBackend.expectOne({ url: `${apiUrl}me`, method: 'GET'});
+			req.flush(mockResponse);
+			expect(profileRes).toBeTruthy();
+			mockBackend.verify();
+		});
+	});
 });
