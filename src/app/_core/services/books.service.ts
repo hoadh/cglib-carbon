@@ -18,7 +18,6 @@ export class BooksService extends HttpBaseService {
 
 	public getBookById(libraryId: string, id: string): Observable<HttpResult> {
 		return this.http.get(`${this.apiUrl}libraries/${libraryId}/books/${id}`);
-		;
 	}
 
 	public filterBooksByFields(libraryId: string, filterBook: Book): Observable<HttpResult> {
