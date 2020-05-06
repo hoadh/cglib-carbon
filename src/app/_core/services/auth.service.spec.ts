@@ -102,4 +102,23 @@ describe('AuthService', () => {
 			mockBackend.verify();
 		});
 	});
+
+	describe('#changePassword', () => {
+		it('should change password with valid inputs', () => {
+			// Arrange
+			const mockResponse = {};
+			const oldPassword = 'old-password';
+			const newPassword = 'new-password';
+			let cpRes;
+
+			// Act
+			service.changePassword(oldPassword, newPassword).subscribe( res => cpRes = res);
+
+			// Assert
+			const req = mockBackend.expectOne({ url: `${apiUrl}change-password`, method: 'POST'} );
+			req.flush(mockResponse);
+			expect(cpRes).toBeTruthy();
+			mockBackend.verify();
+		});
+	});
 });
