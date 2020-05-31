@@ -9,7 +9,7 @@ import { BorrowReceipt } from '../../_models/entities/borrow-receipt';
 export class BooksService extends HttpBaseService {
 
 	public getBooksInLibrary(libraryId: string): Observable<HttpResult> {
-		return this.http.get(`${this.apiUrl}libraries/${libraryId}/books`);
+		return this.http.get(`${this.apiUrl}libraries/${libraryId}/all-books`);
 	}
 
 	public getAllBooks(): Observable<HttpResult> {
