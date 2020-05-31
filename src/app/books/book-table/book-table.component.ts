@@ -96,7 +96,9 @@ export class BookTableComponent implements OnInit {
 			newData.push([
 				new TableItem({ data: datum.title, expandedData: datum.note }),
 				new TableItem({ data: datum.authors }),
-				new TableItem({ data: datum.category.name }),
+				(datum.category)
+					? new TableItem({ data: datum.category.name })
+					: new TableItem({data: ''}),
 				new TableItem({ data: { status: datum.status_id }, template: this.statusTemplate }),
 				new TableItem({ data: datum, template: this.actionTemplate })
 			]);

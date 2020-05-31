@@ -32,9 +32,7 @@
 					<option value="0" selected>Chọn danh mục</option>
 					<option
 						*ngFor="let category of categories" [value]="category.id"
-						[selected]="book !== undefined
-							&& book.category !== undefined
-							&& category.id === book.category.id"
+						[selected]="book && book.category && category.id === book.category.id"
 					>
 						{{category.name}}
 					</option>

@@ -48,7 +48,9 @@ export class BookModalComponent extends BaseModal {
 		if (this.book !== undefined) {
 			this.bookForm.controls.title.setValue(this.book.title);
 			this.bookForm.controls.authors.setValue(this.book.authors);
-			this.bookForm.controls.category_id.setValue(this.book.category.id);
+			if (this.book.category) {
+				this.bookForm.controls.category_id.setValue(this.book.category.id);
+			}
 			this.bookForm.controls.note.setValue(this.book.note);
 		}
 	}
