@@ -4,6 +4,7 @@ import { BookTableComponent } from './book-table.component';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../../_core/core.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BooksService } from '../../_core/services/books.service';
 
 describe('BookTableComponent', () => {
 	let component: BookTableComponent;
@@ -17,6 +18,7 @@ describe('BookTableComponent', () => {
 				CoreModule,
 				HttpClientTestingModule
 			],
+			providers: [BooksService]
 		})
 			.compileComponents();
 	}));
